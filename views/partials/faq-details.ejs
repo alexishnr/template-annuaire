@@ -1,0 +1,327 @@
+<!-- <section class="gray-bg no-top-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>FAQ</h3>
+                <div id="text-details-faq" class="section-text-desc" style="text-align: left">
+                    <h3 class="title-text-faq" style="text-align: left;margin-bottom:5px;">À quelle adresse se trouve le
+                        cabinet du <%= professionnelFormatted.lowerCase %>?</h3>
+                    <p style="color:#2e406e;">Le cabinet du <%= professionnelFormatted.lowerCase %> <%= data.Company %> se trouve à l'adresse <%=
+                                data.Address %>
+                    </p> -->
+<!-- <%if (sections?.sectionRefundsAndServices){%>
+
+                                    <%}%> -->
+<!-- <h3 class="title-text-faq" style="text-align: left;margin-bottom:5px;">Quels
+                                            sont les services
+                                            proposés
+                                            par le cabinet du <%= professionnelFormatted.lowerCase %>?</h3>
+                                        <%if (data?.Services && data?.Services.length> 0 &&
+                                            Array.isArray(data?.Services)){%>
+                                            <p style="color:#2e406e;">Le cabinet du <%= professionnelFormatted.lowerCase %> <%= data.Company %> vous propose
+                                                    les services suivants
+                                                    :
+                                                    <% data?.Services?.forEach((item, index)=> { %>
+                                                        <%=item?.toLowerCase()%>
+                                                            <%if(index!==data?.Services.length-1){%>,<%}%>
+                                                                    <%})%>
+                                            </p>
+                                            <%}else{%>
+                                                <p style="color:#2e406e;">Le cabinet du <%= professionnelFormatted.lowerCase %> <%= data.Company %> n'a
+                                                        pas encore
+                                                        communiqué sur les services qu'il est en mesure de proposer.
+                                                </p>
+                                                <%}%>
+                                                    <h3 class="title-text-faq"
+                                                        style="text-align: left;margin-bottom:5px;">Quelles sont les
+                                                        horaires
+                                                        d'ouverture du cabinet
+                                                        dermatologique?</h3>
+                                                    <p style="color:#2e406e;">Les horaires d'ouverture du cabinet
+                                                        dermatologique <%= data.Company %>
+                                                            sont les
+                                                            suivantes :</p>
+                                                    <ul
+                                                        style="text-align: left;list-style:circle!important;color:#2e406e">
+                                                        <li>Lundi : <%= data.Opening_Hours.lundi===undefined ||
+                                                                data.Opening_Hours.lundi==='undefined'
+                                                                ||data?.Opening_Hours?.lundi==='' ? 'Non renseigné' :
+                                                                data.Opening_Hours.lundi %>
+                                                        </li>
+                                                        <li>Mardi : <%= data.Opening_Hours.mardi===undefined ||
+                                                                data.Opening_Hours.mardi==='undefined'
+                                                                ||data?.Opening_Hours?.mardi==='' ? 'Non renseigné' :
+                                                                data.Opening_Hours.mardi %>
+                                                        </li>
+                                                        <li>Mercredi : <%= data.Opening_Hours.mercredi===undefined ||
+                                                                data.Opening_Hours.mercredi==='undefined'
+                                                                ||data?.Opening_Hours?.mercredi==='' ? 'Non renseigné' :
+                                                                data.Opening_Hours.mercredi %>
+                                                        </li>
+                                                        <li>Jeudi : <%= data.Opening_Hours.jeudi===undefined ||
+                                                                data.Opening_Hours.jeudi==='undefined'
+                                                                ||data?.Opening_Hours?.jeudi==='' ? 'Non renseigné' :
+                                                                data.Opening_Hours.jeudi %>
+                                                        </li>
+                                                        <li>Vedredi : <%= data.Opening_Hours.vendredi===undefined ||
+                                                                data.Opening_Hours.vendredi==='undefined'
+                                                                ||data?.Opening_Hours?.vendredi==='' ? 'Non renseigné' :
+                                                                data.Opening_Hours.vendredi %>
+                                                        </li>
+                                                        <li>Samedi : <%= data.Opening_Hours.samedi===undefined ||
+                                                                data.Opening_Hours.samedi==='undefined'
+                                                                ||data?.Opening_Hours?.samedi==='' ? 'Non renseigné' :
+                                                                data.Opening_Hours.samedi %>
+                                                        </li>
+                                                        <li>Dimanche : <%= data.Opening_Hours.dimanche===undefined ||
+                                                                data.Opening_Hours.dimanche==='undefined'
+                                                                ||data?.Opening_Hours?.dimanche==='' ? 'Non renseigné' :
+                                                                data.Opening_Hours.dimanche %>
+                                                        </li>
+                                                    </ul>
+                                                    <h3 class="title-text-faq"
+                                                        style="text-align: left;margin-bottom:5px;">Comment contacter
+                                                        le
+                                                        cabinet
+                                                        dermatologique?</h3>
+                                                    <%if (data?.Phone !=='' ){%>
+                                                        <p style="color:#2e406e;">Vous pouvez contacter le cabinet
+                                                            dermatologique <%= data.Company %> au
+                                                                numéro
+                                                                suivant : <%= data.Phone %>
+                                                        </p>
+                                                        <%}else{%>
+                                                            <p style="color:#2e406e;">Le cabinet du <%= professionnelFormatted.lowerCase %> <%=
+                                                                    data.Company %> n'a pas encore
+                                                                    mis
+                                                                    ses
+                                                                    informations de contact à jour.
+                                                            </p>
+                                                            <%}%>
+                                                                <h3 class="title-text-faq"
+                                                                    style="text-align: left;margin-bottom:5px;">
+                                                                    Quelles
+                                                                    sont
+                                                                    les
+                                                                    langues
+                                                                    parlées
+                                                                    par le cabinet
+                                                                    dermatologique?</h3>
+                                                                <%if (data?.Languages !=='' && data?.Languages ){%>
+                                                                    <p style="color:#2e406e;">Le cabinet du <%= professionnelFormatted.lowerCase %> <%=
+                                                                            data.Company %> parles
+                                                                            les
+                                                                            langues
+                                                                            suivantes
+                                                                            : <%= data?.Languages?.toLowerCase() %>.</p>
+                                                                    <%}else{%>
+                                                                        <p style="color:#2e406e;">Le cabinet du <%= professionnelFormatted.lowerCase %>
+                                                                            <%= data.Company %>
+                                                                                n'a pas
+                                                                                encore
+                                                                                communiqué les langues parlées.
+                                                                        </p>
+                                                                        <%}%>
+                                                                            <h3 class="title-text-faq"
+                                                                                style="text-align: left;margin-bottom:5px;">
+                                                                                Quels
+                                                                                sont les
+                                                                                moyens
+                                                                                de
+                                                                                paiement proposés
+                                                                                par le cabinet
+                                                                                dermatologique?</h3>
+                                                                            <%if (data?.MeansOfPayment !=='' &&
+                                                                                data?.MeansOfPayment ){%>
+                                                                                <p style="color:#2e406e;">Le cabinet
+                                                                                    dermatologique <%= data.Company %> propose
+                                                                                        les
+                                                                                        moyens de paiement suivants :
+                                                                                        <%=data?.MeansOfPayment?.toLowerCase()%>
+                                                                                </p>
+                                                                                <%}else{%>
+                                                                                    <p style="color:#2e406e;">Le cabinet
+                                                                                        dermatologique <%= data.Company %> n'a
+                                                                                            pas
+                                                                                            encore
+                                                                                            communiqué les moyens de
+                                                                                            paiement disponibles.
+                                                                                    </p>
+                                                                                    <%}%>
+                                                                                        <h3 class="title-text-faq"
+                                                                                            style="text-align: left;margin-bottom:5px;">
+                                                                                            Quels sont les
+                                                                                            modalités de
+                                                                                            remboursements
+                                                                                            proposés
+                                                                                            par le cabinet du <%= professionnelFormatted.lowerCase %>?
+                                                                                        </h3>
+                                                                                        <%if (data?.Refunds &&
+                                                                                            data?.Refunds.length> 0){%>
+                                                                                            <p style="color:#2e406e;">Le
+                                                                                                cabinet du <%= professionnelFormatted.lowerCase %>
+                                                                                                <%= data.Company %>
+                                                                                                    propose les moyens
+                                                                                                    de
+                                                                                                    remboursements
+                                                                                                    suivants : <%
+                                                                                                        data?.Refunds?.forEach((item,
+                                                                                                        index)=> { %>
+                                                                                                        <%=item.toLowerCase()%>
+                                                                                                            <%if(index!==data?.Refunds.length-1){%>,
+                                                                                                                <%}%>
+                                                                                                                    <%})%>
+                                                                                            </p>
+                                                                                            <%}else{%>
+                                                                                                <p
+                                                                                                    style="color:#2e406e;">
+                                                                                                    Le cabinet
+                                                                                                    dermatologique <%=
+                                                                                                        data.Company %>
+                                                                                                        n'a
+                                                                                                        pas encore
+                                                                                                        communiqué les
+                                                                                                        modalités de
+                                                                                                        remboursements
+                                                                                                        proposés.
+                                                                                                </p>
+                                                                                                <%}%>
+                                                                                                    <h3 class="title-text-faq"
+                                                                                                        style="text-align: left;margin-bottom:5px;">
+                                                                                                        Comment accéder
+                                                                                                        en
+                                                                                                        transports au
+                                                                                                        cabinet
+                                                                                                        dermatologique?</h3>
+                                                                                                    <%if (data?.Transports
+                                                                                                        &&
+                                                                                                        data?.Transports.length>
+                                                                                                        0){%>
+                                                                                                        <p
+                                                                                                            style="color:#2e406e;">
+                                                                                                            Pour
+                                                                                                            accéder au
+                                                                                                            cabinet
+                                                                                                            dermatologique <%=
+                                                                                                                data.Company
+                                                                                                                %>, il
+                                                                                                                existe
+                                                                                                                les
+                                                                                                                moyens
+                                                                                                                de
+                                                                                                                transports
+                                                                                                                suivants
+                                                                                                                :
+                                                                                                                <ul
+                                                                                                                    style="text-align: left;list-style:circle!important;color:#2e406e">
+                                                                                                                    <% data?.Transports?.forEach((item,
+                                                                                                                        index)=>
+                                                                                                                        {
+                                                                                                                        %>
+                                                                                                                        <li>
+                                                                                                                            <%=item%>
+                                                                                                                        </li>
+                                                                                                                        <%})%>
+                                                                                                                </ul>
+                                                                                                        </p>
+                                                                                                        <%}else{%>
+                                                                                                            <p
+                                                                                                                style="color:#2e406e;">
+                                                                                                                Le
+                                                                                                                cabinet
+                                                                                                                dermatologique
+                                                                                                                <%= data.Company
+                                                                                                                    %>
+                                                                                                                    n'a
+                                                                                                                    pas
+                                                                                                                    encore
+                                                                                                                    communiqué
+                                                                                                                    les
+                                                                                                                    modes
+                                                                                                                    de
+                                                                                                                    transports
+                                                                                                                    disponibles
+                                                                                                                    pour
+                                                                                                                    se
+                                                                                                                    rendre
+                                                                                                                    au
+                                                                                                                    cabinet.
+                                                                                                            </p>
+                                                                                                            <%}%>
+                                                                                                                <h3 class="title-text-faq"
+                                                                                                                    style="text-align: left;margin-bottom:5px;">
+                                                                                                                    Où
+                                                                                                                    se
+                                                                                                                    garer
+                                                                                                                    en
+                                                                                                                    voiture
+                                                                                                                    pour
+                                                                                                                    accéder
+                                                                                                                    au
+                                                                                                                    cabinet
+                                                                                                                    dermatologique?
+                                                                                                                </h3>
+                                                                                                                <%if (data?.Parkings
+                                                                                                                    &&
+                                                                                                                    data?.Parkings.length>
+                                                                                                                    0){%>
+                                                                                                                    <p
+                                                                                                                        style="color:#2e406e;">
+                                                                                                                        Pour
+                                                                                                                        accéder
+                                                                                                                        au
+                                                                                                                        cabinet
+                                                                                                                        dermatologique
+                                                                                                                        <%= data.Company
+                                                                                                                            %>
+                                                                                                                            ,
+                                                                                                                            il
+                                                                                                                            existe
+                                                                                                                            les
+                                                                                                                            les
+                                                                                                                            parkings
+                                                                                                                            suivants
+                                                                                                                            à
+                                                                                                                            proximité
+                                                                                                                            :
+                                                                                                                            <ul
+                                                                                                                                style="text-align: left;list-style:circle!important;color:#2e406e">
+                                                                                                                                <% data?.Parkings?.forEach((item,
+                                                                                                                                    index)=>
+                                                                                                                                    {
+                                                                                                                                    %>
+                                                                                                                                    <li>
+                                                                                                                                        <%=item%>
+                                                                                                                                    </li>
+                                                                                                                                    <%})%>
+                                                                                                                            </ul>
+                                                                                                                    </p>
+                                                                                                                    <%}else{%>
+                                                                                                                        <p
+                                                                                                                            style="color:#2e406e;">
+                                                                                                                            Le
+                                                                                                                            cabinet
+                                                                                                                            dermatologique
+                                                                                                                            <%= data.Company
+                                                                                                                                %>
+                                                                                                                                n'a
+                                                                                                                                pas
+                                                                                                                                encore
+                                                                                                                                communiqué
+                                                                                                                                les
+                                                                                                                                modes
+                                                                                                                                de
+                                                                                                                                parkings
+                                                                                                                                disponibles
+                                                                                                                                à
+                                                                                                                                proximité
+                                                                                                                                du
+                                                                                                                                cabinet.
+                                                                                                                        </p>
+                                                                                                                        <%}%>
+                                                                                                                            <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->

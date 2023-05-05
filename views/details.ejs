@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="robots" content="index, follow" />
+  <link rel="shortcut icon" href="images/favicon-96x96.png">
+  <title>
+    <%= professionnelFormatted.capitalized %> <%= data.Company %> | Prendre Rdv Aujourd'hui.
+  </title>
+  <meta name="description"
+    content="Trouvez un rdv avec le <%= professionnelFormatted.lowerCase %>: <%= data.Company %>, <%= data.Address %> pour une consultation." />
+  <link rel="stylesheet" href="css/icons.css">
+  <link rel="stylesheet" href="css/solid.min.css">
+  <link rel="stylesheet" href="css/regular.min.css">
+  <link rel="stylesheet" href="css/home.min.css">
+  <link href="css/bootstrap-grid.min.css" async rel="stylesheet">
+  <link rel="stylesheet" href="css/custom-home.min.css" async>
+  <link rel="stylesheet" href="css/modal.css">
+
+  <script src="js/googletagmanager.js" crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "",
+      "name": "<%= data?.Company %>",
+      "@id": "<%= data?.ProfessionnelUid %>",
+      "url": "<%= website.url %>/<%= professionnelFormatted.slug %>/<%= data?.Url %>",
+      "telephone": "<%= data?.Phone %>",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "<%= data?.Rating == 0 ? 1 :  data?.Rating %>",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "<%= data?.ReviewsNumber == 0 ? 1 :  data?.ReviewsNumber %>"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "<%= data?.Address.split(',').splice(0) %>",
+        "addressLocality": "<%= data?.Department %>",
+        "postalCode": "<%= data?.PostCode %>",
+        "addressCountry": "<%= data?.Country %>"
+      }
+    }
+  </script>
+</head>
+
+<body style="overflow-x: hidden!important;">
+  <!-- nav -->
+  <%- include partials/header.ejs %>
+    <!-- end nav -->
+    <!-- header -->
+    <div id="header-details" style="overflow-x: hidden!important;">
+      <div class="container">
+      <div class="header-content">
+        <col class="row">
+        <div class="col-12 no-padding">
+            <div class="topContainer">
+              <div class="list-single-main-media fl-wrap" style="width:200px;height:200px">
+                <% if (data?.Avatar?.formats?.medium?.url && data?.More_informations?.informations !=='infoNotDisplayed'
+                  ){%>
+                  <img id="theImageTopIndex" data-src="<%= data?.Avatar.formats.medium.url%>"
+                    src="<%= data?.Avatar.formats.medium.url%>" loading="lazy" alt="image <%= professionnelFormatted.lowerCase %> <%= data?.Company%>">
+                  <%}else if (data?.Avatar?.url && data?.More_informations?.informations !=='infoNotDisplayed' ){%>
+                    <img style="width:200px;height:200px" id="theImageTopIndex" data-src="<%= data?.Avatar.url%>"
+                      src="<%= data?.Avatar.url%>" loading="lazy" alt="image <%= professionnelFormatted.lowerCase %> <%= data?.Company%>">
+                    <%}else{%>
+                      <img style="width:200px;height:200px" id="theImageTopIndex"
+                        data-src="hhttps://www.api.h2hstudioweb.com/charliepets/wp-content/uploads/2023/05/bg.jpg"
+                        src="hhttps://www.api.h2hstudioweb.com/charliepets/wp-content/uploads/2023/05/bg.jpg"
+                        loading="lazy" alt="image ce <%= professionnelFormatted.lowerCase %> <%= data?.Company%>">
+                      <%}%>
+              </div>
+              <h1 style="font-size: 22px;" class="col-xs-12 col-sm-9 details-title">
+                <%= data.Company %><div style="display: flex;flex-direction: column;">
+                  <span style="font-size: 13px;color:#FFF">
+                      <% for(var i=0; i < Math.round(data?.Rating); i++){ %>
+                        ⭐
+                        <%}%> - <%= data?.ReviewsNumber %> <%= data?.ReviewsNumber> 1 ? 'notes' : 'note' %> 
+                      </span>
+                </div>
+              </h1>
+            </div>
+          </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+    <!-- end header -->
+        <!-- breadcrumb -->
+        <section id="breadcrumb-top" class="gray-bg no-top-padding">
+          <div class="container">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/"><%= professionnelFormatted.capitalized %></a></li>
+                <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slug %>/<%= data.slugCity%>/"><%= professionnelFormatted.capitalized %> <%=
+                      data?.City%>
+                  </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <%= data?.Company %>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </section>
+        <!-- end breadcrumb -->
+        <div style="overflow-x: hidden!important;" id="noscroll" class="gray-bg">
+          <section id="main-section-details" class="gray-bg no-top-padding">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="left-details row">
+                              <%if(sections?.sectionRefundsAndServices){%>
+                                <!-- Refunds & Services informations -->
+                                <div class="list-single-main-wrapper fl-wrap" id="sec2">
+                                  <div class="list-single-main-item fl-wrap block_box">
+                                    <div class="list-single-main-item-title">
+                                      <h2
+                                        style="font-size:19px;padding: 10px;color:#253b56; text-align:left;border-bottom: 1px solid #eee;text-align: center;">
+                                        Remboursements et services
+                                      </h2>
+                                    </div>
+                                    <div class="list-single-main-item_content fl-wrap">
+                                      <div class="inside-box row">
+                                        <%if(data?.Refunds && data?.Refunds?.length> 0){%>
+                                          <div class="sub-section col-12 col-sm-6">
+                                            <h3 class="subtitle-details">Remboursements</h3>
+                                            <div class="row">
+                                              <% data?.Refunds?.forEach((item, i)=> { %>
+                                                <span class="skill-tag">
+                                                  <%=item%>
+                                                </span>
+                                                <%})%>
+                                              </div>
+                                          </div>
+                                          <%}%>
+                                            <%if(data?.MeansOfPayment !=='' && data?.MeansOfPayment){%>
+                                              <div class="sub-section col-12 col-sm-6">
+                                                <h3 class="subtitle-details">Moyens de paiement</h3>
+                                                <span>
+                                                  <%=data?.MeansOfPayment%>
+                                                </span>
+                                              </div>
+                                              <%}%>
+                                      </div>
+                                      <%if(data?.Services && data?.Services.length> 0 &&
+                                        Array.isArray(data?.Services)
+                                        ){%>
+                                        <div class="separator-box"></div>
+                                        <div class="inside-box">
+                                          <div class="sub-section">
+                                            <h3 class="subtitle-details">Services</h3>
+                                            <div class="row">
+                                              <% data?.Services?.forEach((item, i)=> { %>
+                                                <span class="skill-tag">
+                                                  <%=item%>
+                                                </span>
+                                                <%})%>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <%}%>
+                                          <div class="separator-box"></div>
+                                          <a id="btn-send-review"
+                                            href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity %>/<%= data?.Url %>/avis/"
+                                            class=" btn">Voir
+                                            les
+                                            avis de
+                                            ce <%= professionnelFormatted.lowerCase %> 
+                                          </a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- end Refunds & Services informations -->
+                                <%}else{%>
+                                  <%- include partials/no-details.ejs %>
+                                    <%}%>
+                                                <!-- Infos -->
+                                                <div class="list-single-main-wrapper fl-wrap" id="sec2">
+                                                  <div class="list-single-main-item fl-wrap block_box">
+                                                    <div class="list-single-main-item-title">
+                                                      <h2
+                                                        style="font-size:19px;padding: 10px;color:#253b56; text-align:left;border-bottom: 1px solid #eee;text-align: center;">
+                                                        Accès
+                                                      </h2>
+                                                    </div>
+                                                    <div class="list-single-main-item_content fl-wrap">
+                                                      <div style="display: flex; flex-direction: column;">
+                                                        <div class="inside-box">
+                                                          <div class="sub-section">
+                                                            <h3 class="subtitle-details">Adresse</h3>
+                                                            <span>
+                                                              <%= data.Address %>
+                                                            </span>
+                                                          </div>
+                                                        </div>
+                                                        <%if(data?.Transports && data?.Transports.length> 0){%>
+                                                          <div class="separator-box"></div>
+                                                          <div class="inside-box">
+                                                            <div class="sub-section">
+                                                              <h3 class="subtitle-details">Transports</h3>
+                                                              <div class="row">
+                                                                <% data?.Transports?.forEach((item, i)=> { %>
+                                                                  <span class="item-details col-12">
+                                                                    <%=item%>
+                                                                  </span>
+                                                                  <%})%>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                          <%}%>
+                                                            <%if(data?.Parkings && data?.Parkings.length> 0){%>
+                                                              <div class="separator-box"></div>
+                                                              <div class="inside-box">
+                                                                <div class="sub-section">
+                                                                  <h3 class="subtitle-details">Parkings publics</h3>
+                                                                  <div class="row">
+                                                                    <% data?.Parkings?.forEach((item, i)=> { %>
+                                                                      <span class="item-details col-12">
+                                                                        <%=item%>
+                                                                      </span>
+                                                                      <%})%>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                              <%}%>
+                                                                <%if(data?.PracticalInfos &&
+                                                                  data?.PracticalInfos.length>
+                                                                  0){%>
+                                                                  <div class="separator-box"></div>
+                                                                  <div class="inside-box">
+                                                                    <div class="sub-section">
+                                                                      <h3 class="subtitle-details">Informations
+                                                                        pratiques
+                                                                      </h3>
+                                                                      <div class="row">
+                                                                        <% data?.PracticalInfos?.forEach((item, i)=> {
+                                                                          %>
+                                                                          <span class="item-details col-12">
+                                                                            <%=item%>
+                                                                          </span>
+                                                                          <%})%>
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                  <%}%>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <!-- end main informations -->
+                                                <%if(sections?.sectionAbout){%>
+                                                  <!-- Infos -->
+                                                  <div class="list-single-main-wrapper fl-wrap" id="sec2">
+                                                    <div class="list-single-main-item fl-wrap block_box">
+                                                      <div class="list-single-main-item-title">
+                                                        <h2
+                                                          style="font-size:19px;padding: 10px;color:#253b56; text-align:left;border-bottom: 1px solid #eee;text-align: center;">
+                                                          À propos
+                                                        </h2>
+                                                      </div>
+                                                      <div class="list-single-main-item_content fl-wrap">
+                                                        <div style="display: flex; flex-direction: column;">
+                                                          <div class="inside-box">
+                                                            <div class="sub-section">
+                                                              <h3 class="subtitle-details">Nom du cabinet du <%= professionnelFormatted.lowerCase %></h3>
+                                                              <span>
+                                                                <%= data?.Company %>
+                                                              </span>
+                                                            </div>
+                                                          </div>
+                                                          <!-- <%if(data?.Presentation){%>
+                                        <div class="sub-section">
+                                          <h3 class="subtitle-details">Présentation</h3>
+                                          <span class="item-details">
+                                            <%=data?.Presentation%>
+                                          </span>
+                                        </div>
+                                        <%}%> -->
+                                                          <%if(data?.Languages && data?.Languages !=='' ){%>
+                                                            <div class="separator-box"></div>
+                                                            <div class="sub-section">
+                                                              <h3 class="subtitle-details">Langues</h3>
+                                                              <span class="item-details">
+                                                                <%=data?.Languages%>
+                                                              </span>
+                                                            </div>
+                                                            <%}%>
+                                                              <%if(data?.Experiences && data?.Experiences.length> 0){%>
+                                                                <div class="separator-box"></div>
+                                                                <div class="sub-section">
+                                                                  <h3 class="subtitle-details">Expériences</h3>
+                                                                  <div class="row">
+                                                                    <% data?.Experiences?.forEach((item, i)=> { %>
+                                                                      <span class="item-details col-12">
+                                                                        <%=item%>
+                                                                      </span>
+                                                                      <%})%>
+                                                                  </div>
+                                                                </div>
+                                                                <%}%>
+                                                                  <%if(data?.Qualifications &&
+                                                                    data?.Qualifications.length>
+                                                                    0){%>
+                                                                    <div class="separator-box"></div>
+                                                                    <div class="sub-section">
+                                                                      <h3 class="subtitle-details">Diplômes</h3>
+                                                                      <div class="row">
+                                                                        <% data?.Qualifications?.forEach((item, i)=> {
+                                                                          %>
+                                                                          <span class="item-details col-12">
+                                                                            <%=item%>
+                                                                          </span>
+                                                                          <%})%>
+                                                                      </div>
+                                                                    </div>
+                                                                    <%}%>
+                                                                      <%if(data?.Formations && data?.Formations.length>
+                                                                        0){%>
+                                                                        <div class="separator-box"></div>
+                                                                        <div class="sub-section">
+                                                                          <h3 class="subtitle-details">Formations</h3>
+                                                                          <div class="row">
+                                                                            <% data?.Formations?.forEach((item, i)=> {
+                                                                              %>
+                                                                              <span class="item-details col-12">
+                                                                                <%=item%>
+                                                                              </span>
+                                                                              <%})%>
+                                                                          </div>
+                                                                        </div>
+                                                                        <%}%>
+                                                                          <%if(data?.OtherFormations &&
+                                                                            data?.OtherFormations.length>
+                                                                            0){%>
+                                                                            <div class="separator-box"></div>
+                                                                            <div class="sub-section">
+                                                                              <h3 class="subtitle-details">Autres
+                                                                                Formations
+                                                                              </h3>
+                                                                              <div class="row">
+                                                                                <% data?.OtherFormations?.forEach((item,
+                                                                                  i)=>
+                                                                                  {
+                                                                                  %>
+                                                                                  <span class="item-details col-12">
+                                                                                    <%=item%>
+                                                                                  </span>
+                                                                                  <%})%>
+                                                                              </div>
+                                                                            </div>
+                                                                            <%}%>
+                                                                              <%if(data?.Associations &&
+                                                                                data?.Associations.length>
+                                                                                0){%>
+                                                                                <div class="separator-box"></div>
+                                                                                <div class="sub-section">
+                                                                                  <h3 class="subtitle-details">
+                                                                                    Associations
+                                                                                  </h3>
+                                                                                  <div class="row">
+                                                                                    <% data?.Associations?.forEach((item,
+                                                                                      i)=>
+                                                                                      {
+                                                                                      %>
+                                                                                      <span class="item-details col-12">
+                                                                                        <%=item%>
+                                                                                      </span>
+                                                                                      <%})%>
+                                                                                  </div>
+                                                                                </div>
+                                                                                <%}%>
+                                                                                  <%if(data?.Prizes &&
+                                                                                    data?.Prizes.length>
+                                                                                    0){%>
+                                                                                    <div class="separator-box"></div>
+                                                                                    <div class="sub-section">
+                                                                                      <h3 class="subtitle-details">Prix
+                                                                                        et
+                                                                                        récompences</h3>
+                                                                                      <div class="row">
+                                                                                        <% data?.Prizes?.forEach((item,
+                                                                                          i)=>
+                                                                                          {
+                                                                                          %>
+                                                                                          <span
+                                                                                            class="item-details col-12">
+                                                                                            <%=item%>
+                                                                                          </span>
+                                                                                          <%})%>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                    <%}%>
+                                                                                      <%if(data?.Works &&
+                                                                                        data?.Works.length>
+                                                                                        0){%>
+                                                                                        <div class="separator-box">
+                                                                                        </div>
+                                                                                        <div class="sub-section">
+                                                                                          <h3 class="subtitle-details">
+                                                                                            Travaux
+                                                                                          </h3>
+                                                                                          <div class="row">
+                                                                                            <% data?.Works?.forEach((item,
+                                                                                              i)=>
+                                                                                              {
+                                                                                              %>
+                                                                                              <span
+                                                                                                class="item-details col-12">
+                                                                                                <%=item%>
+                                                                                              </span>
+                                                                                              <%})%>
+                                                                                          </div>
+                                                                                        </div>
+                                                                                        <%}%>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <!-- end main informations -->
+                                                  <%}%>
+                                                    <%if(data?.Prices && data?.Prices.length> 0){%>
+                                                      <!-- Infos -->
+                                                      <div class="list-single-main-wrapper fl-wrap" id="sec2">
+                                                        <div class="list-single-main-item fl-wrap block_box">
+                                                          <div class="list-single-main-item-title">
+                                                            <h2
+                                                              style="font-size:19px;padding: 10px;color:#253b56; text-align:left;border-bottom: 1px solid #eee;text-align: center;">
+                                                              Tarifs
+                                                            </h2>
+                                                          </div>
+                                                          <div class="list-single-main-item_content fl-wrap">
+                                                            <div style="display: flex; flex-direction: column;">
+                                                              <div class="sub-section">
+                                                                <div class="row">
+                                                                  <% data?.Prices?.forEach((item, index)=> { %>
+                                                                    <%if(item['Price']){%>
+                                                                      <span class="subtitle-details col-6">
+                                                                        <%= item['Service'] %>
+                                                                      </span>
+                                                                      <span class="item-details col-6"
+                                                                        style="text-align: right!important">
+                                                                        <%=item['Price']%>
+                                                                      </span>
+                                                                      <%}else{%>
+                                                                        <span class="item-details col-12">
+                                                                          <%=item['Service']%>
+                                                                        </span>
+                                                                        <%}%>
+                                                                          <%if(index!==data?.Prices.length-1){%>
+                                                                            <div class="separator-box"></div>
+                                                                            <%}%>
+                                                                              <%})%>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <!-- end main informations -->
+                                                      <%}%>
+
+                  </div>
+                  <div class="left-details">
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="right-details">
+                    <!-- <div id="ad-sense" class="block_box"> -->
+                    <!-- Bloc Annonce page de detail -->
+                    <!-- <ins class="adsbygoogle" style="display:block;height:auto" data-ad-client="ca-pub-3349045265944653"
+                data-ad-slot="6302926220" data-ad-format="auto" data-full-width-responsive=“true”></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div> -->
+                    <!-- box-widget-item-hours -->
+                    <div class="box-widget box-widget-item fl-wrap block_box">
+                      <div class="box-widget-item-header">
+                        <h3>Horaires d'ouverture ⏰</h3>
+                      </div>
+                      <div class="opening-hours fl-wrap">
+                        <div class="box-widget-content">
+                          <div class="day">
+                            <span class="opening-hours-day">Lundi </span>
+                            <span class="opening-hours-time">
+                              <%= data.Opening_Hours.lundi===undefined || data.Opening_Hours.lundi==='undefined'
+                                ||data?.Opening_Hours?.lundi==='' ? 'Non renseigné' : data.Opening_Hours.lundi %>
+                            </span>
+                          </div>
+                          <div class="day"><span class="opening-hours-day">Mardi </span><span
+                              class="opening-hours-time">
+                              <%= data.Opening_Hours.mardi===undefined || data.Opening_Hours.mardi==='undefined' ||
+                                data?.Opening_Hours?.mardi==='' ? 'Non renseigné' : data.Opening_Hours.mardi %>
+                            </span></div>
+                          <div class="day"><span class="opening-hours-day">Mercredi </span><span
+                              class="opening-hours-time">
+                              <%= data.Opening_Hours.mercredi===undefined || data.Opening_Hours.mercredi==='undefined'
+                                || data?.Opening_Hours?.mercredi==='' ? 'Non renseigné' : data.Opening_Hours.mercredi %>
+                            </span></div>
+                          <div class="day"><span class="opening-hours-day">Jeudi </span><span
+                              class="opening-hours-time">
+                              <%= data.Opening_Hours.jeudi===undefined || data.Opening_Hours.jeudi==='undefined' ||
+                                data?.Opening_Hours?.jeudi==='' ? 'Non renseigné' : data.Opening_Hours.jeudi %>
+                            </span></div>
+                          <div class="day"><span class="opening-hours-day">Vendredi </span><span
+                              class="opening-hours-time">
+                              <%= data.Opening_Hours.vendredi===undefined || data.Opening_Hours.vendredi==='undefined'
+                                || data?.Opening_Hours?.vendredi==='' ? 'Non renseigné' : data.Opening_Hours.vendredi %>
+                            </span></div>
+                          <div class="day"><span class="opening-hours-day">Samedi </span><span
+                              class="opening-hours-time">
+                              <%= data.Opening_Hours.samedi===undefined || data.Opening_Hours.samedi==='undefined' ||
+                                data?.Opening_Hours?.samedi==='' ? 'Non renseigné' : data.Opening_Hours.samedi %>
+                            </span></div>
+                          <div class="day"><span class="opening-hours-day">Dimanche </span><span
+                              class="opening-hours-time">
+                              <%= data.Opening_Hours.dimanche===undefined || data.Opening_Hours.dimanche==='undefined'
+                                || data?.Opening_Hours?.dimanche==='' ? 'Non renseigné' : data.Opening_Hours.dimanche %>
+                            </span></div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end box-widget-item-hours -->
+                              <!-- box-widget-item-info -->
+                              <div class="box-widget-item fl-wrap block_box">
+                                <div class="box-widget-item-header">
+                                  <h3>Localisation / Contacts 🏥 </h3>
+                                  <%- include partials/location.ejs %>
+                                </div>
+                              </div>
+                              <div class="box-widget-item fl-wrap block_box">
+                                <div class="box-widget-item-header">
+                                  <h3>Vous êtes le praticien ? 👩🏻‍⚕️ </h3>
+                                </div>
+                                <div class="box-widget">
+                                  <div id="box-widget-info" class="box-widget-content bwc-nopad">
+                                    <div class="list-author-widget-contacts list-item-widget-contacts bwc-padside">
+                                      <div class="details-info-widget">
+                                        <span>Vous pouvez demander gratuitement la modification de votre fiche.</span>
+                                        <a id="display-info" href="https://airtable.com/shram9zbqiALWt1Vl"
+                                          target="_blank" rel="noopener noreferrer" rel="nofollow">
+                                          Modifier votre fiche pro
+                                        </a>
+                                      </div>
+                                      <div class="list-author-widget-contacts list-item-widget-contacts bwc-padside">
+                                        <div class="details-info-widget">
+                                          <span>En remplissant certains critères, vous pouvez également demander à être
+                                            un
+                                            <%= professionnelFormatted.lowerCase %>
+                                            vérifié sur notre plateforme et ainsi accroître votre visibilité et la
+                                            confiance de
+                                            nos
+                                            utilisateurs.</span>
+                                          <a id="display-info" href="https://airtable.com/shrNV1CeNZ4o5v7vV"
+                                            target="_blank" rel="noopener noreferrer" rel="nofollow">
+                                            Nous contacter
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--end box-widget-item-info -->
+                                </div>
+                              </div>
+                  </div>
+          </section>
+
+          <!-- certified professionnals -->
+          <section class="gray-bg no-top-padding" id="moreProfessionnal">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <% if (bestResults.length> 0){%>
+                    <div style="display:flex;align-items: center;justify-content: center;margin: 20px auto;">
+                      <h3 class="listing-title" style="width: max-content;"><%= website.name %> vous recommande ces
+                        <%= professionnelFormatted.pluralLowerCase %>
+                        vérifiés à <%= data?.City %>
+                      </h3>
+                      
+                    </div>
+                    <div>
+                      <div class="row">
+                        <% bestResults?.forEach((item, i)=> { %>
+                          <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="search-result">
+                              <%- include partials/pro-card.ejs %>
+                            </div>
+                          </div>
+                        <%})%>
+                        <% if (arrondissements?.length> 0 && !data?.BlanchimentDentaire){%>
+                          <div style="margin:50px 0"></div>
+                          <div class="container">
+                            <div class="row">
+                              <div class="container-arrondissements">
+                                <div class="row">
+                                  <% arrondissements?.forEach((item, i)=> { %>
+                                    <a href="/<%= professionnelFormatted.slug %>/<%= item?.place %>/" class="col-4 col-sm-3 col-md-2">
+                                      <div class="border-arrondissements">
+                                        <span>
+                                          <%= professionnelFormatted.pluralCapitalized %> <%= item?.name %>
+                                        </span>
+                                      </div>
+                                    </a>
+                                    <%})%>
+                                </div>
+                              </div>
+                            </div>
+                            <%}%>
+                              <div class="col-12" style="width: 100%;margin-top: 20px;">
+                                <a href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity %>/"
+                                  class="btn dec_btn color2-bg color2-text">Voir tous les <%= professionnelFormatted.pluralLowerCase %></a>
+                              </div>
+                          </div>
+                      </div>
+                      <%}%>
+                    </div>
+                </div>
+              </div>
+
+          </section>
+                      <!-- end banner -->
+          <!-- end certified professionnals -->
+          <!-- FAQ section -->
+          <%- include partials/faq-details.ejs %>
+            <!-- End FAQ section -->
+        </div>
+
+            <!--footer -->
+            <%- include partials/footer.ejs %>
+              <!--footer end -->
+              <!-- certified professionnals -->
+
+              <!-- The core Firebase JS SDK is always required and must be listed first -->
+              <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+              <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+              <script src="https://www.googleoptimize.com/optimize.js?id=OPT-WTX8CNV"></script>
+              <script src="https://kit.fontawesome.com/4283a0ad11.js" crossorigin="anonymous" async></script>
+              <script src="js/details.min.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

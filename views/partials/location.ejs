@@ -1,0 +1,50 @@
+<!-- Location HERE -->
+<div id="box-widget-info" class="box-widget-content bwc-nopad locationBox">
+  <div
+    class="list-author-widget-contacts list-item-widget-contacts bwc-padside"
+  >
+    <div class="details-info-widget">
+      <span>📍 Adresse :</span>
+
+      <a href="https://maps.google.com/?q=<%= data.Address %>">
+        <%= data?.Address==='' ? 'Non renseigné' : data?.Address %>
+      </a>
+    </div>
+    <div class="details-info-widget">
+      <span>☎️ Téléphone :</span>
+      <a href="tel:<%= data?.Phone %>">
+        <%= data?.Phone==='' ? 'Non renseigné' : data?.Phone %>
+      </a>
+    </div>
+    <div class="details-info-widget">
+      <span>✉️ Email :</span>
+      <a href="mailto: <%= data?.Email %>">
+        <%= data?.Email==='' ? 'Non renseigné' : data?.Email %>
+      </a>
+    </div>
+    <div class="details-info-widget">
+      <span>🌍 Site Web :</span>
+      <a style="color: #253b56" rel="nofollow">
+        <%= data?.Website==='' ? 'Non renseigné' :
+        data?.Website?.split('/').splice(0,3).join('/') %>
+      </a>
+    </div>
+    <%if(data?.Facebook !=='' ){%>
+    <div class="details-info-widget">
+      <a href="<%= data?.Facebook %>"> Visiter Facebook </a>
+    </div>
+    <%}%> <%if(data?.Twitter !=='' ){%>
+    <div class="details-info-widget">
+      <a href="<%= data?.Twitter %>"> Visiter Twitter </a>
+    </div>
+    <%}%> <%if(data?.Instagram !=='' ){%>
+    <div class="details-info-widget">
+      <a href="<%= data?.Instagram %>"> Visiter Instagram </a>
+    </div>
+    <%}%> <%if(data?.Linkedin !=='' ){%>
+    <div class="details-info-widget">
+      <a href="<%= data?.Linkedin %>"> Visiter Linkedin </a>
+    </div>
+    <%}%>
+  </div>
+</div>

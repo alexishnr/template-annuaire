@@ -1,0 +1,109 @@
+<!--footer -->
+<footer class="main-footer">
+  <!--footer-inner-->
+  <div class="footer-inner">
+    <div class="container">
+      <div class="row">
+        <!-- footer-widget-->
+        <div class="col-md-12">
+          <div class="footer-widget fl-wrap">
+            <div class="footer-logo">
+              <a href="/"
+                ><img
+                  loading="lazy"
+                  src="images/marker2.png"
+                  alt="logo <%= website.name %>"
+              /></a>
+            </div>
+            <div class="footer-contacts-widget fl-wrap">
+              <p>
+                Attention cet email ne permet pas de rentrer en contact avec un
+                <%= professionnelFormatted.lowerCase %>.
+              </p>
+              <ul class="footer-contacts fl-wrap no-list-style">
+                <li>
+                  <span><i class="far fa-envelope"></i> Mail :</span
+                  ><a href="" target="_blank" rel="noopener"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- footer-widget end-->
+        <!-- footer-widget-->
+        <div class="col-md-4">
+          <div class="footer-widget fl-wrap">
+            <h3><%= professionnelFormatted.pluralCapitalized %> par ville</h3>
+            <div class="footer-widget-posts fl-wrap">
+              <ul class="no-list-style">
+                <li class="clearfix">
+                  <div class="widget-posts-descr">
+                    <a href="/<%= professionnelFormatted.slug %>/lyon/" title=""
+                      ><%= professionnelFormatted.pluralCapitalized %> Lyon</a
+                    >
+                  </div>
+                </li>
+                <li class="clearfix">
+                  <div class="widget-posts-descr">
+                    <a
+                      href="/<%= professionnelFormatted.slug %>/paris/"
+                      title=""
+                      ><%= professionnelFormatted.pluralCapitalized %> Paris</a
+                    >
+                  </div>
+                </li>
+                <li class="clearfix">
+                  <div class="widget-posts-descr">
+                    <a
+                      href="/<%= professionnelFormatted.slug %>/bordeaux/"
+                      title=""
+                      ><%= professionnelFormatted.pluralCapitalized %>
+                      Bordeaux</a
+                    >
+                  </div>
+                </li>
+                <li class="clearfix">
+                  <div class="widget-posts-descr">
+                    <a
+                      href="/<%= professionnelFormatted.slug %>/lille/"
+                      title=""
+                      ><%= professionnelFormatted.pluralCapitalized %> Lille</a
+                    >
+                  </div>
+                </li>
+                <li class="clearfix">
+                  <div class="widget-posts-descr">
+                    <a
+                      href="/<%= professionnelFormatted.slug %>/marseille/"
+                      title=""
+                      ><%= professionnelFormatted.pluralCapitalized %>
+                      Marseille</a
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- footer-widget end-->
+      </div>
+    </div>
+  </div>
+  <!--footer-inner end -->
+  <!--sub-footer-->
+  <div class="sub-footer fl-wrap">
+    <div class="container">
+      <div class="legal-mentions-footer">
+        <div class="copyright">
+          &#169; <%= website.name %> 2019 . Tous droits réservés.
+        </div>
+        <ul
+          style="display: flex; justify-content: flex-start; padding: 0"
+          class="no-list-style copyright"
+        ></ul>
+      </div>
+    </div>
+  </div>
+  <!--sub-footer end -->
+</footer>
+<!--footer end -->

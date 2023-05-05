@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="robots" content="index, follow" />
+  <link rel="shortcut icon" href="images/favicon-96x96.png">
+  <title><%= professionnelFormatted.pluralCapitalized %> à <%= place %>, Rdv Aujourd'hui 24h/24 & 7j/7</title>
+  <meta name="description"
+    content="Vous cherchez un <%= professionnelFormatted.lowerCase %> à <%= place %>, prenez rendez-vous gratuitement en ligne avec un <%= professionnelFormatted.lowerCase %> près de chez vous 24/24 & 7/7." />
+  <link rel="stylesheet" href="/css/home.min.css">
+  <link href="css/bootstrap-grid.min.css" async rel="stylesheet">
+  <link rel="stylesheet" href="css/custom-home.min.css" async>
+  <link rel="preload" fetchpriority="high" as="image"
+    href="<%= website.wpUrl %>/wp-content/uploads/2023/05/bg.jpg" type="image/webp">
+  
+<body>
+  <!-- nav -->
+  <%- include partials/header.ejs %>
+    <!-- end nav -->
+    <!-- header -->
+    <div id="header">
+      <div class="overlay"></div>
+      <div class="headerContent">
+        <h1><%= professionnelFormatted.pluralCapitalized %> à <%= place %>
+        </h1>
+        <h2 style="color:#FFF; margin-bottom:40px;">Trouvez un <%= professionnelFormatted.lowerCase %> à <%= place %></h2>
+      </div>
+    </div>
+    <!-- end header -->
+    <!-- breadcrumb -->
+    <section id="breadcrumb-top">
+      <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><%= professionnelFormatted.capitalized %> <%= place%>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+    <!-- end breadcrumb -->
+    <div class="page-content">
+      <div class="container">
+        <div class="row">
+          <!-- Text -->
+          <div id="text-home" class="section-text-desc">
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
+
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
+
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
+
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
+          </div>
+          <!-- end Text -->
+          <!-- banner -->
+          <%if(isBannerDisplayed){%>
+          <%- include partials/banner.ejs %>
+        <%}%>
+            <!-- end banner -->
+            <% if (bestResults?.length> 0){%>
+              <!-- certified professionnals -->
+              <div style="display:flex;align-items: center;justify-content: center;">
+                <h3 class="listing-title"
+                  style="border:none;background: linear-gradient(266.44deg,#006eff 8.93%,#811eff 95.38%);-webkit-background-clip:text;-webkit-text-fill-color: transparent;width: 90%;">
+                  Nous vous recommandons ces <%= professionnelFormatted.pluralLowerCase %> vérifiés à <%= place %>
+                </h3>
+                <span class="verified-badge" style="margin-top: -2px;"><i class="fas fa-check"></i></span>
+              </div>
+              <% bestResults?.forEach((item, i)=> { %>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                  <div class="search-result">
+                    <%- include partials/pro-card.ejs %>
+                  </div>
+                </div>
+              <%})%>
+                  <!-- end certified professionnals -->
+                  <%}%>
+                    <span class="section-separator"></span>
+                    <!--  professionnals -->
+                    <% if (bestResults?.length> 0){%>
+                      <h3 class="listing-title" id="results">Tous nos <%= professionnelFormatted.pluralLowerCase %> à <%= place %>
+                      </h3>
+                      <% if (arrondissements?.length> 0){%>
+                        <div class="container-arrondissements">
+                          <div class="row">
+                            <% arrondissements?.forEach((item, i)=> { %>
+                              <a href="/<%= professionnelFormatted.slug %>/<%= item?.place %>/" class="col-4 col-sm-3 col-md-2">
+                                <div class="border-arrondissements">
+                                  <span><%= professionnelFormatted.pluralCapitalized %> <%= item?.name %></span>
+                                </div>
+                              </a>
+                              <%})%>
+                          </div>
+                        </div>
+                        <%}%>
+                          <div class="section-text">
+                            <div class="container">
+                              <div class="row">
+                                <% results?.forEach((item, i)=> { %>
+                                  <div class="col-xs-12 col-sm-6 col-md-4">
+                                    <div class="search-result hidden">
+                                      <%- include partials/pro-card.ejs %>
+                                    </div>
+                                  </div>
+                                  <%})%>
+                              </div>
+                              <div class="col-12" style="width: 100%;margin-top: 20px;">
+                                <button id="loadmore" class="btn dec_btn color2-bg color2-text">Voir plus<i
+                                    class="fas fa-chevron-right"></i></button>
+                              </div>
+                            </div>
+                          </div>
+                          <%}%>
+                            <% if (bestResults?.length===0){%>
+                              <h3 class="listing-title" id="results">Désolé, il n'y a pas de <%= professionnelFormatted.pluralLowerCase %> disponibles à
+                                <%= place %> sur notre plateforme.
+                              </h3>
+                              <%}%>
+      
+        </div>
+      </div>
+    </div>
+    <!--footer -->
+    <%- include partials/footer.ejs %>
+      <!--footer end -->
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+      <script src="https://kit.fontawesome.com/4283a0ad11.js" crossorigin="anonymous" async></script>
+      <script src="js/listing.min.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

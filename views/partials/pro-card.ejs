@@ -1,0 +1,61 @@
+<a
+  href="/<%= professionnelFormatted.slug %>/<%= item?.slugCity %>/<%= item?.Url %>/"
+>
+  <div class="search-result-presentation">
+    <div class="search-result-title-container">
+      <div class="search-result-avatar">
+        <% if (item?.Avatar?.formats?.thumbnail?.url){%>
+        <img
+          data-src="<%= item?.Avatar?.formats?.thumbnail?.url %>"
+          src="<%= item?.Avatar?.formats?.thumbnail?.url %>"
+          loading="lazy"
+          alt="image <%= professionnelFormatted.lowerCase %> <%= item?.Company%>"
+        />
+        <%}else if (item?.Avatar?.url){%>
+        <img
+          data-src="<%= item?.Avatar.url%>"
+          src="<%= item?.Avatar.url%>"
+          loading="lazy"
+          alt="image <%= professionnelFormatted.lowerCase %> <%= item?.Company%>"
+        />
+        <%}else{%>
+        <img
+          data-src="<%= website.wpUrl %>/wp-content/uploads/2023/05/bg.jpg"
+          src="<%= website.wpUrl %>/wp-content/uploads/2023/05/bg.jpg"
+          loading="lazy"
+          alt="image <%= professionnelFormatted.lowerCase %> <%= item?.Company%>"
+        />
+        <%}%>
+      </div>
+      <div class="search-result-title">
+        <h3 class="search-profession">
+          <%= item?.DoctolibName ? item?.DoctolibName : item?.Company%>
+          <span class="verified-badge"><i class="fas fa-check"></i></span>
+        </h3>
+        <div class="search-result-subtitle">
+          <%= professionnelFormatted.capitalized %>
+        </div>
+      </div>
+    </div>
+    <div class="search-result-content">
+      <i class="fas fa-map-marker-alt"></i>
+      <p><%= item?.Address?.split(',').splice(0,2).join(',') %></p>
+    </div>
+    <div class="search-rating-content">
+      <div class="review-score">
+        <%= item?.Rating> 0 ? item?.Rating?.toFixed(0) : "-" %>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <p class="text-reviews">
+          <%= item?.ReviewsNumber %> <%= item?.ReviewsNumber> 1 ? 'notes' :
+          'note' %>
+        </p>
+        <div>
+          <% for(var i=0; i < Math.round(item?.Rating); i++){ %>
+          <i class="fas fa-star"></i>
+          <%}%>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>

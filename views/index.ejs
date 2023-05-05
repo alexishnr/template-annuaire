@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.<%= website.name %>.com/">
+  <link rel="shortcut icon" href="images/favicon-96x96.png">
+  <title><%= professionnelFormatted.pluralCapitalized %> & <%= professionnelFormatted.pluralLowerCase %> de garde | Rdv Aujourd'hui 24h/24 & 7j/7</title>
+  <meta name="description"
+    content="<%= professionnelFormatted.lowerCase %>, trouvez un <%= professionnelFormatted.lowerCase %> et un <%= professionnelFormatted.lowerCase %> de garde 24h/24 & 7j/7 près de chez vous pour votre animal. Prenez rendez-vous gratuitement en ligne en quelques clics." />
+  <link rel="stylesheet" href="/css/home.min.css">
+  <link href="css/bootstrap-grid.min.css" async rel="stylesheet">
+  <link rel="stylesheet" href="css/custom-home.min.css" async>
+  <link rel="preload" fetchpriority="high" as="image"
+    href="<%= website.wpUrl %>/wp-content/uploads/2023/05/bg.jpg" type="image/webp">
+</head>
+
+<body>
+  <!-- header -->
+  <%- include partials/header.ejs %>
+    <!-- end header -->
+    <div id="header">
+      <div class="overlay"></div>
+      <div class="headerContent">
+        <h1><%= professionnelFormatted.pluralCapitalized %> & <%= professionnelFormatted.pluralLowerCase %> de garde</h1>
+        <h2 style="color: #FFF;">Trouvez un <%= professionnelFormatted.lowerCase %> 24h/24 7j/7</h2>
+        <form class="searchForm" id="indexForm" action="/recherche" method="POST">
+          <div class="col-12">
+            <input type="text" class="form-control" id="autocompleteid3" name="user_input_autocomplete_address"
+              placeholder="Selectionner une ville">
+            <input id="place_input2" type="hidden" name="PlaceToSearch">
+            <input id="place_input3" type="hidden" name="CountryToSearch">
+            <button type="submit" class="btn btn-primary mb-3" id="searchButton" disabled type="submit">Trouver un
+              <%= professionnelFormatted.lowerCase %><i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="page-content" style="padding-top: 0;">
+      <div class="container">
+        <div class="row">
+          <div style="margin:20px 0"></div>
+          <div id="text-home" style="margin-bottom:50px" class="section-text-desc">
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
+
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
+
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
+
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
+          </div>        
+        </div>
+      </div>
+      <!-- banner -->
+        <%if(isBannerDisplayed){%>
+          <%- include partials/banner.ejs %>
+        <%}%>
+      <!-- end banner -->
+      <section class="gray-bg hidden-section particles-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="section-text">
+              <h2>Nos articles sur les mutuelles</h2>
+              <span class="section-separator"></span>
+              <p>Retrouvez dans cette section nos derniers articles sur les mutuelles !</p>
+            </div>
+            <div class="listing-item-grid_container-blog col-12">
+              <div class="row">
+                <% resultBlog?.filter(article=> article.categories.includes(5))?.splice(0,6).forEach((item,
+                  i)=> { %>
+                  <!--  listing-item-grid  -->
+                  <div class="col-sm-4">
+                    <a href="/blog/<%= item?.slug %>/">
+                      <div class="listing-item-grid">
+                        <img class="bg"
+                          src="<%= item?.x_featured_media_large ? item?.x_featured_media_large : item?.x_featured_media_original %>"
+                          alt="Image article blog <%= item?.title?.rendered %>" loading="lazy" />
+                        <div class="d-gr-sec"></div>
+                        <div class="listing-item-grid_title">
+                          <h3><a class="title-card-blog" href="/blog/<%= item?.slug %>/">
+                              <%= item?.title?.rendered %>
+                            </a></h3>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <!--  listing-item-grid end  -->
+                  <%})%>
+                    <div style="margin:15px 0 30px 0;padding:unset" class="col-12">
+                      <a href="/blog/mutuelle/" class="btn dec_btn color2-bg color2-text"
+                        style="width:auto;margin:auto;">Voir
+                        tous
+                        les
+                        articles sur la mutuelle<i class="fas fa-chevron-right"></i></a>
+                    </div>
+                    <div class="listing-item-grid_container-blog col-12">
+                            <div class="section-text">
+                              <h2>Nos articles sur la santé </h2>
+                              <span class="section-separator"></span>
+                              <p>Retrouvez dans cette section nos derniers articles sur la santé  !</p>
+                            </div>
+                            <% resultBlog?.filter(article=> article.categories.includes(3))?.splice(0,6).forEach((item,
+                              i)=> {
+                              %>
+                              <!--  listing-item-grid  -->
+                              <div class="col-sm-4">
+                                <a href="/blog/<%= item?.slug %>/">
+                                  <div class="listing-item-grid">
+                                    <img class="bg"
+                                      src="<%= item?.x_featured_media_large ? item?.x_featured_media_large : item?.x_featured_media_original %>"
+                                      alt="Image article blog <%= item?.title?.rendered %>" loading="lazy" />
+                                    <div class="d-gr-sec"></div>
+                                    <div class="listing-item-grid_title">
+                                      <h3><a class="title-card-blog" href="/blog/<%= item?.slug %>/">
+                                          <%= item?.title?.rendered %>
+                                        </a></h3>
+                                      <p>
+                                        <!-- <%= item?.content?.rendered?.substring(0,100) %>... -->
+                                      </p>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                              <!--  listing-item-grid end  -->
+                              <%})%>
+                    </div>
+                    <a href="/blog/" class="btn dec_btn color2-bg color2-text" style="width:auto;margin:auto;">Voir tous
+                      les
+                      articles<i class="fas fa-chevron-right"></i></a>
+              </div>
+            </div>
+      </section>
+      <div style="margin:30px 0"></div>
+      <div class="container">
+        <div class="row">
+          <div style="margin-top: 50px;">
+            <h2 class="title-text">Trouver un <%= professionnelFormatted.lowerCase %> par ville</h2>
+            <span class="section-separator"></span>
+            <% if (citiesList?.length> 0){%>
+              <div class="container-arrondissements">
+                <div class="row">
+                  <% citiesList?.forEach((item, i)=> { %>
+                    <a href="/<%= professionnelFormatted.slug %>/<%= item?.slug %>/" class="col-4 col-sm-3 col-md-2">
+                      <div class="border-arrondissements">
+                        <span><%= professionnelFormatted.pluralCapitalized %> <%= item?.city %></span>
+                      </div>
+                    </a>
+                    <%})%>
+                </div>
+              </div>
+              <%}%>
+              <!-- banner -->
+              <%if(isBannerDisplayed){%>
+                <%if(isBannerDisplayed){%>
+          <%- include partials/banner.ejs %>
+        <%}%>
+              <%}%>
+            <!-- end banner -->
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!--footer -->
+    <%- include partials/footer.ejs %>
+      <!--footer end -->
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js" link rel=prefetch></script>
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js" link rel=prefetch></script>
+      <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?libraries=places&components=country:fr&amp;key=AIzaSyCebJT42DWxaH2_MzIkm3J5sDDy4C4qWUc"
+        link rel=prefetch></script>
+      <script src="https://kit.fontawesome.com/4283a0ad11.js" crossorigin="anonymous" link rel=prefetch async></script>
+      <script src="js/home.min.js" crossorigin="anonymous" link rel=prefetch></script>
+</body>
+
+</html>

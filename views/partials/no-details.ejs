@@ -1,0 +1,65 @@
+<div
+  style="
+    background-color: #fff;
+    min-height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  "
+  class="block_box"
+>
+  <div style="width: 90%; margin-bottom: 50px; color: #2e406e">
+    <p class="questions_text">
+      <%= data?.Company %> vous accueille au <%= data?.Address?.split(',')[0] %>
+      à <%= data?.City %> (<%= data?.Department %>). <%
+      if(data?.Services?.service1 && data?.Services?.service1 !=='' ){%>
+    </p>
+
+    <p class="questions_text">
+      <%= data?.Company %> vous reçoit pour :<br />
+      - <%= data?.Services?.service1 %><br />
+      <% if(data?.Services?.service2 && data?.Services?.service2 !=='' ){%>- <%=
+      data.Services.service2 %>
+      <br />
+      <%}%> <% if(data?.Services?.service3 && data?.Services?.service3 !==''
+      ){%>- <%= data.Services.service3 %>
+      <br />
+      <%}%> <% if(data?.Services?.service4 && data?.Services?.service4 !==''
+      ){%>- <%= data.Services.service4 %>
+      <br />
+      <%}%> <% if(data?.Services?.service5 && data?.Services?.service5 !==''
+      ){%>- <%= data?.Services?.service5 %>
+      <br />
+      <%}%> <%}%><br />
+      <%= data?.Description %>
+    </p>
+
+    <h3>
+      Comment préparer son rendez-vous chez le <%=
+      professionnelFormatted.lowerCase %> ?
+    </h3>
+    <!-- <p>
+      Il est important d'établir une liste de vos antécédents médicaux, en
+      prenant en compte non seulement ceux liés à votre peau, mais aussi les
+      traitements que vous suivez actuellement, les allergies que vous avez, le
+      tabagisme, ainsi que toute maladie grave ou chronique dont vous pourriez
+      souffrir.
+    </p>
+
+    <p>
+      Même les compléments alimentaires ou vitamines que vous prenez
+      régulièrement peuvent être pertinents et doivent être mentionnés.
+    </p> -->
+
+    <a
+      id="btn-send-review"
+      href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity %>/<%= data?.Url %>/avis/"
+      class="btn color2-bg float-btn"
+      >Voir les avis de ce <%= professionnelFormatted.lowerCase %><i
+        class="far fa-comments"
+      ></i>
+    </a>
+  </div>
+</div>
