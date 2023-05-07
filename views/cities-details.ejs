@@ -1,32 +1,33 @@
 <!-- header -->
-<div id="header">
-  <div class="overlay"></div>
+<div id="header" class="header-no-cta">
+  <div class="overlay overlay-no-cta"></div>
   <div class="headerContent">
-    <h1>Régions</h1>
+    <h1>Dentistes <%= region.Name %></h1>
   </div>
 </div>
 <!-- end header -->
+<!-- breadcrumb -->
+<section id="breadcrumb-top" class="no-top-padding">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="/regions/">Régions</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <%= professionnelFormatted.pluralCapitalized %> <%= region.Name %>
+        </li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<!-- end breadcrumb -->
 <div class="page-content">
   <div class="container">
     <div class="row">
-      <!-- breadcrumb -->
-      <section id="breadcrumb-top" class="no-top-padding">
-        <div class="container">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-              <li class="breadcrumb-item active" aria-current="page">
-                Régions
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </section>
-      <!-- end breadcrumb -->
       <!-- banner -->
-      <%if(isBannerDisplayed){%> <%- include partials/banner.ejs %> <%}%>
+      <%- include partials/banner.ejs %>
       <!-- end banner -->
-      <%regions?.forEach(region=>{%>
+      <%cities?.forEach(item=> {%>
       <!--  listing-item-grid  -->
       <div class="col-sm-6 lazy" style="padding: 0">
         <ul class="no-list-style">
@@ -34,15 +35,15 @@
             <div class="widget-posts-descr" style="text-align: left">
               <a
                 style="
-                  color: #697891;
+                  color: #253b56;
                   font-weight: 500;
                   font-size: 20px;
                   white-space: nowrap;
                 "
-                href="/regions/<%= region?.Url%>/"
+                href="/recherche/dentiste/<%= item?.city_slug %>/"
                 title=""
               >
-                <%= region?.Name %>
+                <%= item?.city %>
               </a>
             </div>
           </li>
@@ -52,7 +53,7 @@
       <%})%>
       <div style="margin: 30px 0"></div>
       <!-- banner -->
-      <%if(isBannerDisplayed){%> <%- include partials/banner.ejs %> <%}%>
+      <%- include partials/banner.ejs %>
       <!-- end banner -->
     </div>
   </div>

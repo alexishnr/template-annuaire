@@ -26,6 +26,7 @@ const auth = projectConfig.auth;
 const configProfessionnel = projectConfig.configProfessionnel;
 const professionnelFormatted = projectConfig.professionnelFormatted;
 const website = projectConfig.website;
+const metas = require("../config/config").metas;
 
 // FILES //
 let dataArrondissements = require("../public/js/arrondissementsList");
@@ -53,6 +54,8 @@ function decodeEntities(encodedString) {
     });
 }
 
+const replaceMetas = (metas, replace) => {};
+
 // REDIRECT LINKS
 let r = function (req, res) {
   res.redirect(410, "/error");
@@ -69,7 +72,7 @@ router.get("/", function (req, res) {
   if (cacheBody === null) {
     fetch(
       wpApi +
-        `/wp-json/wp/v2/posts?categories=${configWP.categoriesIndex}&per_page=100`,
+        `/wp-json/wp/v2/posts?categories=${configWP.categoryFeaturedSante},${configWP.categoryFeaturedMutuelle}&per_page=100`,
       {
         agent,
       }
@@ -81,10 +84,12 @@ router.get("/", function (req, res) {
       .then((respText) => {
         res.render("index", {
           resultBlog: JSON.parse(decodeEntities(respText)),
+          categories: configWP,
           citiesList: citiesList,
           isBannerDisplayed,
           professionnelFormatted,
           website,
+          metas: metas.index,
         });
       })
       .catch((e) => {
@@ -94,15 +99,18 @@ router.get("/", function (req, res) {
           isBannerDisplayed,
           professionnelFormatted,
           website,
+          metas: metas.index,
         });
       });
   } else {
     res.render("index", {
       resultBlog: JSON.parse(decodeEntities(respText)),
+      categories: configWP,
       citiesList: citiesList,
       isBannerDisplayed,
       professionnelFormatted,
       website,
+      metas: metas.index,
     });
   }
 });
@@ -113,6 +121,7 @@ router.post("/recherche", function (req, res) {
 });
 
 router.get(`/:${professionnel}/:PlaceToSearch`, function (req, res) {
+  console.log(typeof host, "host");
   const PlaceToSearch = clean(req.params.PlaceToSearch);
   let City;
 
@@ -172,16 +181,21 @@ router.get(`/:${professionnel}/:PlaceToSearch`, function (req, res) {
           b.Rating - a.Rating ||
           b.ReviewsNumber.toString().localeCompare(a.ReviewsNumber.toString())
       );
+      const place = City.charAt(0).toUpperCase() + City.slice(1);
       res.render("listing", {
         results: resultsData,
         bestResults: resultsData.splice(0, 6),
-        place: City.charAt(0).toUpperCase() + City.slice(1),
+        place,
         data: null,
         arrondissements: arrondissements,
         citiesList: citiesList,
         isBannerDisplayed,
         professionnelFormatted,
         website,
+        metas: {
+          title: metas.listing.title.replace("<%= place %>", place),
+          description: metas.listing.description.replace("<%= place %>", place),
+        },
       });
     });
 });
@@ -348,6 +362,11 @@ router.get(`/:${professionnel}/:ville/:name`, function (req, res) {
               //   data?.Presentation !== "") ||
               (data?.Languages !== null && data?.Languages !== "");
 
+            const correctionMetas = {
+              "<%= company %>": data?.Company,
+              "<%= address %>": data?.Address,
+            };
+
             return res.render("details", {
               data: data,
               products: responseAsJson.data.shoppingveterinaires,
@@ -359,6 +378,16 @@ router.get(`/:${professionnel}/:ville/:name`, function (req, res) {
               isBannerDisplayed,
               professionnelFormatted,
               website,
+              metas: {
+                title: metas.details.title.replace(
+                  "<%= company %>",
+                  data?.Company
+                ),
+                description: metas.details.description.replace(
+                  /<%= company %>|<%= address %>/g,
+                  (matched) => correctionMetas[matched]
+                ),
+              },
             });
           } else {
             res.redirect("/error");
@@ -517,6 +546,16 @@ router.get(`/:${professionnel}/:ville/:name/avis/:error?`, function (req, res) {
               isBannerDisplayed,
               professionnelFormatted,
               website,
+              metas: {
+                title: metas.reviews.title.replace(
+                  "<%= company %>",
+                  data?.Company
+                ),
+                description: metas.reviews.description.replace(
+                  "<%= company %>",
+                  data?.Company
+                ),
+              },
             });
           } else {
             res.redirect("/error");
@@ -649,7 +688,7 @@ router.post("/add-review", function (req, res) {
 router.get("/blog/mutuelle", function (req, res) {
   fetch(
     wpApi +
-      `/wp-json/wp/v2/posts?categories=${configWP.categoriesIndex}&per_page=100`,
+      `/wp-json/wp/v2/posts?categories=${configWP.categoryMutuelle}&per_page=100`,
     { agent }
   )
     .then((resp) => {
@@ -670,6 +709,7 @@ router.get("/blog/mutuelle", function (req, res) {
         isBannerDisplayed,
         professionnelFormatted,
         website,
+        metas: metas.mutuelle,
       });
       console.error(e);
     });
@@ -715,6 +755,16 @@ router.get("/blog/:name", function (req, res) {
                 isBannerDisplayed,
                 professionnelFormatted,
                 website,
+                metas: {
+                  title: metas.blogDetails.title.replace(
+                    "<%= articleTitle %>",
+                    data?.title?.rendered
+                  ),
+                  description: metas.blogDetails.description.replace(
+                    "<%= articleTitle %>",
+                    data?.title?.rendered
+                  ),
+                },
               });
             });
         });
@@ -737,8 +787,10 @@ router.get("/blog", function (req, res) {
       res.render("blog", {
         resultBlog: JSON.parse(decodeEntities(respText)),
         isBannerDisplayed,
+        categories: configWP,
         professionnelFormatted,
         website,
+        metas: metas.blog,
       });
     })
     .catch((e) => {
@@ -747,15 +799,16 @@ router.get("/blog", function (req, res) {
         isBannerDisplayed,
         professionnelFormatted,
         website,
+        metas: metas.blog,
       });
       console.error(e);
     });
 });
 
-router.get("/mutuelle", function (req, res) {
+router.get("/mutuelle/", function (req, res) {
   fetch(
     wpApi +
-      `/wp-json/wp/v2/posts?categories=${configWP.categoriesIndex}&per_page=100`,
+      `/wp-json/wp/v2/posts?categories=${configWP.categoryFeaturedMutuelle}&per_page=100`,
     { agent }
   )
     .then((resp) => {
@@ -763,11 +816,14 @@ router.get("/mutuelle", function (req, res) {
       return body;
     })
     .then((respText) => {
+      console.log(respText);
       res.render("mutuelle", {
         resultBlog: JSON.parse(decodeEntities(respText)),
         isBannerDisplayed,
         professionnelFormatted,
         website,
+        metas: metas.mutuelle,
+        categories: configWP.categoryFeaturedMutuelle,
       });
     })
     .catch((e) => {
@@ -776,22 +832,27 @@ router.get("/mutuelle", function (req, res) {
         isBannerDisplayed,
         professionnelFormatted,
         website,
+        metas: metas.mutuelle,
+        categories: [],
       });
       console.error(e);
     });
 });
 
 router.get("/contact", function (req, res) {
-  res.render("contact");
+  res.render("contact", {
+    metas: metas.contact,
+    website,
+    isBannerDisplayed,
+    professionnelFormatted,
+  });
 });
 
-router.get("/mentionlegales", function (req, res) {
-  res.render("mentionlegale");
-});
-
-router.get("/reseaux", function (req, res) {
-  res.render("reseaux");
-});
+// router.get("/mentionlegales", function (req, res) {
+//   res.render("mentionlegale", {
+//     metas: metas.mentionLegales,
+//   });
+// });
 
 router.get("/regions", function (req, res) {
   let regions = [
@@ -813,7 +874,11 @@ router.get("/regions", function (req, res) {
     { Name: "La Réunion", Url: "la-reunion" },
     { Name: "Guyane", Url: "guyane" },
   ];
-  res.render("all-regions", { regions, isBannerDisplayed });
+  res.render("all-regions", {
+    regions,
+    isBannerDisplayed,
+    metas: metas.regions,
+  });
 });
 
 router.get("/regions/:region", function (req, res) {
@@ -852,6 +917,13 @@ router.get("/regions/:region", function (req, res) {
         cities,
         region: region[0],
         isBannerDisplayed,
+        metas: {
+          title: metas.reviews.title.replace("<%= region %>`", region[0]),
+          description: metas.reviews.description.replace(
+            "<%= region %>`",
+            region[0]
+          ),
+        },
       });
     })
     .catch((e) => {
@@ -860,7 +932,12 @@ router.get("/regions/:region", function (req, res) {
 });
 
 router.get("/error", function (req, res) {
-  res.render("error", { isBannerDisplayed });
+  res.render("error", {
+    isBannerDisplayed,
+    website,
+    metas,
+    professionnelFormatted,
+  });
 });
 
 module.exports = router;

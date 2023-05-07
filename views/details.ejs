@@ -1,25 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-  <meta name="robots" content="index, follow" />
-  <link rel="shortcut icon" href="images/favicon-96x96.png">
-  <title>
-    <%= professionnelFormatted.capitalized %> <%= data.Company %> | Prendre Rdv Aujourd'hui.
-  </title>
-  <meta name="description"
-    content="Trouvez un rdv avec le <%= professionnelFormatted.lowerCase %>: <%= data.Company %>, <%= data.Address %> pour une consultation." />
-  <link rel="stylesheet" href="css/icons.css">
-  <link rel="stylesheet" href="css/solid.min.css">
-  <link rel="stylesheet" href="css/regular.min.css">
-  <link rel="stylesheet" href="css/home.min.css">
-  <link href="css/bootstrap-grid.min.css" async rel="stylesheet">
-  <link rel="stylesheet" href="css/custom-home.min.css" async>
-  <link rel="stylesheet" href="css/modal.css">
-
-  <script src="js/googletagmanager.js" crossorigin="anonymous"></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -45,11 +23,6 @@
     }
   </script>
 </head>
-
-<body style="overflow-x: hidden!important;">
-  <!-- nav -->
-  <%- include partials/header.ejs %>
-    <!-- end nav -->
     <!-- header -->
     <div id="header-details" style="overflow-x: hidden!important;">
       <div class="container">
@@ -630,18 +603,3 @@
           <%- include partials/faq-details.ejs %>
             <!-- End FAQ section -->
         </div>
-
-            <!--footer -->
-            <%- include partials/footer.ejs %>
-              <!--footer end -->
-              <!-- certified professionnals -->
-
-              <!-- The core Firebase JS SDK is always required and must be listed first -->
-              <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
-              <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
-              <script src="https://www.googleoptimize.com/optimize.js?id=OPT-WTX8CNV"></script>
-              <script src="https://kit.fontawesome.com/4283a0ad11.js" crossorigin="anonymous" async></script>
-              <script src="js/details.min.js" crossorigin="anonymous"></script>
-</body>
-
-</html>

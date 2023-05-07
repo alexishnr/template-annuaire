@@ -1,59 +1,32 @@
-<!DOCTYPE HTML>
-<html lang="fr">
-
-<head>
-    <!--=============== basic  ===============-->
-    <meta charset="UTF-8">
-    <title><%= website.name %> Blog </title>
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="index, follow" />
-    <meta name="description"
-        content="<%= website.name %> | Trouvez les meilleurs <%= professionnelFormatted.pluralLowerCase %> près de chez vous pour votre <%= professionnelFormatted.lowerCase %>. Prenez rendez-vous gratuitement en ligne en quelques clics." />
-    <!--=============== css  ===============-->
-    <link rel="stylesheet" href="/css/home.min.css">
-    <link href="css/bootstrap-grid.min.css" async rel="stylesheet">
-    <link rel="stylesheet" href="css/custom-home.min.css" async>
-    <link rel="preload" fetchpriority="high" as="image"
-        href="<%= website.wpUrl %>/wp-content/uploads/2023/05/bg.jpg" type="image/webp">
-    <!--=============== favicons ===============-->
-    <link rel="shortcut icon" href="images/favicon-96x96.png">
-    <script src="js/googletagmanager.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <!-- nav -->
-    <%- include partials/header.ejs %>
-        <!-- end nav -->
-        <!-- header -->
-        <div id="header">
-            <div class="overlay"></div>
-            <div class="headerContent">
-                <h1>Mutuelle dermatologique</h1>
-            </div>
-        </div>
-        <!-- end header -->
-        <!-- breadcrumb -->
-        <section id="breadcrumb-top" class="no-top-padding">
-            <div class="container">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Mutuelle
-                        </li>
-                    </ol>
-                </nav>
-            </div>
-        </section>
-        <!-- end breadcrumb -->
-        <div class="page-content">
-            <div class="container">
-                <div class="row">
-                    <!-- banner -->
-                   <%if(isBannerDisplayed){%>
-           <%- include partials/banner-blog.ejs %>
-        <%}%>
-                        <!-- end banner -->
+    <!-- header -->
+    <div id="header">
+      <div class="overlay"></div>
+      <div class="headerContent">
+        <h1>Mutuelle</h1>
+      </div>
+    </div>
+    <!-- end header -->
+    <!-- breadcrumb -->
+    <section id="breadcrumb-top" class="no-top-padding">
+      <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Mutuelle
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+    <!-- end breadcrumb -->
+    <div class="page-content">
+      <div class="container">
+        <div class="row">
+          <!-- banner -->
+          <%if(isBannerDisplayed){%>
+          <%- include partials/banner-blog.ejs %>
+          <%}%>
+            <!-- end banner -->
                 </div>
             </div>
             <!-- blog -->
@@ -67,52 +40,35 @@
                         </div>
                         <div class="listing-item-grid_container-blog col-12">
                             <div class="row">
-                                <% resultBlog?.filter(article=> article.categories.includes(4))?.forEach((item, i)=> {
-                                    %>
-                                    <!--  listing-item-grid  -->
-                                    <div class="col-sm-4">
-                                        <a href="/blog/<%= item?.slug %>/">
-                                            <div class="listing-item-grid">
-                                                <img class="bg"
-                                                    src="<%= item?.x_featured_media_large ? item?.x_featured_media_large : item?.x_featured_media_original %>"
-                                                    alt="Image article blog <%= item?.title?.rendered %>"
-                                                    loading="lazy" />
-                                                <div class="d-gr-sec"></div>
-                                                <div class="listing-item-grid_title">
-                                                    <h3><a class="title-card-blog" href="/blog/<%= item?.slug %>/">
-                                                            <%= item?.title?.rendered %>
-                                                        </a></h3>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <!--  listing-item-grid end  -->
-                                    <%})%>
-                            </div>
-                        </div>
-            </section>
-            <!-- end blog -->
-            <div class="container">
-                <div class="row">
-                    <!-- banner -->
-                   <%if(isBannerDisplayed){%>
-           <%- include partials/banner-blog.ejs %>
-        <%}%>
+                                <% resultBlog?.filter(article=> article.categories.includes(categories))?.forEach((item, i)=> {%>
+          <div class="col-sm-4">
+            <a href="/blog/<%= item?.slug %>/">
+              <div class="listing-item-grid">
+                <img class="bg" src="<%= item?.x_featured_media_large ? item?.x_featured_media_large : item?.x_featured_media_original %>" alt="Image article blog <%= item?.title?.rendered %>" loading="lazy" />
+                <div class="d-gr-sec"></div>
+                <div class="listing-item-grid_title">
+                  <h3><a class="title-card-blog" href="/blog/<%= item?.slug %>/">
+                      <%= item?.title?.rendered %>
+                    </a></h3>
+                </div>
+              </div>
+            </a>
+          </div>
+          <%})%>
+        </div>
+      </div>
+      </section>
+      <!-- end blog -->
+      <div class="container">
+        <div class="row">
+          <!-- banner -->
+          <%if(isBannerDisplayed){%>
+          <%- include partials/banner-blog.ejs %>
+          <%}%>
                         <!-- end banner -->
                 </div>
             </div>
         </div>
         </div>
         </div>
-        <!--footer -->
-        <%- include partials/footer.ejs %>
-            <!--footer end -->
-            <!-- The core Firebase JS SDK is always required and must be listed first -->
-            <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js" link rel=prefetch></script>
-            <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js" link rel=prefetch></script>
-            <script src="https://kit.fontawesome.com/4283a0ad11.js" crossorigin="anonymous" link rel=prefetch></script>
-            <script src="js/home.min.js" crossorigin="anonymous" link rel=prefetch></script>
-            <script src="js/listing.min.js" crossorigin="anonymous"></script>
-</body>
-
-</html>
+        <script src="/js/listing.min.js" crossorigin="anonymous"></script>

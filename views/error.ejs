@@ -1,101 +1,45 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <!--=============== basic  ===============-->
-    <meta charset="UTF-8" />
-    <title><%= website.name %> Page non trouvée</title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <meta name="robots" content="index, follow" />
-    <meta
-      name="description"
-      content="Mon Urgence Dermatologique | Trouvez les meilleurs <%= professionnelFormatted.pluralLowerCase %> près de chez vous pour votre <%= professionnelFormatted.lowerCase %>. Prenez rendez-vous gratuitement en ligne en quelques clics."
-    />
-    <!--=============== css  ===============-->
-    <link rel="stylesheet" href="/css/home.min.css" />
-    <link href="css/bootstrap-grid.min.css" async rel="stylesheet" />
-    <link rel="stylesheet" href="css/custom-home.min.css" async />
-    <link
-      rel="preload"
-      fetchpriority="high"
-      as="image"
-      href="<%= website.wpUrl %>/wp-content/uploads/2023/05/bg.jpg"
-      type="image/webp"
-    />
-    <!--=============== favicons ===============-->
-    <link rel="shortcut icon" href="images/favicon-96x96.png" />
-  </head>
-
-  <body>
-    <!-- nav -->
-    <%- include partials/header.ejs %>
-    <!-- end nav -->
-    <!-- header -->
-    <div id="header">
-      <div class="overlay"></div>
-      <div class="headerContent">
-        <h1>404</h1>
+<!-- header -->
+<div id="header">
+  <div class="overlay"></div>
+  <div class="headerContent">
+    <h1>404</h1>
+  </div>
+</div>
+<!-- end header -->
+<!-- breadcrumb -->
+<section id="breadcrumb-top" class="no-top-padding">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Erreur</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<!-- end breadcrumb -->
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>Erreur</h2>
       </div>
+      <p style="text-align: center; margin: auto">
+        Désolé, la page que vous recherchez n'existe pas.
+      </p>
+      <div class="clearfix"></div>
+      <div class="col-12" style="width: 100%; margin-top: 20px">
+        <button
+          onclick="location.href='/'"
+          class="btn dec_btn color2-bg color2-text"
+        >
+          Retour à la page d'accueil<i class="fa fa-home"></i>
+        </button>
+      </div>
+      <div style="margin: 30px 0"></div>
+      <!-- banner mutuelle -->
+      <%if(isBannerDisplayed){%> <%- include partials/banner.ejs %> <%}%>
+      <!-- FIN banner mutuelle -->
     </div>
-    <!-- end header -->
-    <!-- breadcrumb -->
-    <section id="breadcrumb-top" class="no-top-padding">
-      <div class="container">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Erreur</li>
-          </ol>
-        </nav>
-      </div>
-    </section>
-    <!-- end breadcrumb -->
-    <div class="page-content">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h2>Erreur</h2>
-          </div>
-          <p style="text-align: center; margin: auto">
-            Désolé, la page que vous recherchez n'existe pas.
-          </p>
-          <div class="clearfix"></div>
-          <div class="col-12" style="width: 100%; margin-top: 20px">
-            <button
-              onclick="location.href='/'"
-              class="btn dec_btn color2-bg color2-text"
-            >
-              Retour à la page d'accueil<i class="fa fa-home"></i>
-            </button>
-          </div>
-          <div style="margin: 30px 0"></div>
-          <!-- banner mutuelle -->
-          <%if(isBannerDisplayed){%> <%- include partials/banner.ejs %> <%}%>
-          <!-- FIN banner mutuelle -->
-        </div>
-      </div>
-    </div>
-    <!--footer -->
-    <%- include partials/footer.ejs %>
-    <!--footer end -->
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script
-      src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"
-      link
-      rel="prefetch"
-    ></script>
-    <script
-      src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"
-      link
-      rel="prefetch"
-    ></script>
-    <script
-      src="js/home.min.js"
-      crossorigin="anonymous"
-      link
-      rel="prefetch"
-    ></script>
-  </body>
-</html>
+  </div>
+</div>

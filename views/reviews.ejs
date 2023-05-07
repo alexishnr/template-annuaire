@@ -1,27 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-  <meta name="robots" content="index, follow" />
-  <link rel="shortcut icon" href="images/favicon-96x96.png">
-  <title>Avis des patients du <%= professionnelFormatted.lowerCase %> <%= data.Company %>
-  </title>
-  <meta name="description"
-    content="Lire les avis du <%= professionnelFormatted.lowerCase %>: <%= data.Company %>, parcourez les avis des clients afin de trouver le meilleur <%= professionnelFormatted.lowerCase %>." />
-  <link rel="stylesheet" href="css/icons.css">
-  <link rel="stylesheet" href="css/solid.min.css">
-  <link rel="stylesheet" href="css/regular.min.css">
-  <link rel="stylesheet" href="css/home.min.css">
-  <link href="css/bootstrap-grid.min.css" async rel="stylesheet">
-  <link rel="stylesheet" href="css/modal.css">
-  <link rel="stylesheet" href="css/custom-home.min.css" async>
-  <link rel="preload" fetchpriority="high" as="image"
-    href="<%= website.wpUrl %>/wp-content/uploads/2023/05/bg.jpg" type="image/webp">
-  <script src="js/googletagmanager.js" crossorigin="anonymous"></script>
-
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Dentist",
@@ -45,81 +22,70 @@
     }
   }
 </script>
-</head>
-
-<body style="overflow-x: hidden!important;">
-  <!-- nav -->
-  <%- include partials/header.ejs %>
-    <!-- end nav -->
-     <!-- header -->
-    <div id="header-details" style="overflow-x: hidden!important;">
-      <div class="container">
+  <!-- header -->
+  <div id="header-details" style="overflow-x: hidden!important;">
+    <div class="container">
       <div class="header-content">
         <col class="row">
         <div class="col-12 no-padding">
           <div class="topContainer">
-              <div class="list-single-main-media fl-wrap" style="width:200px;height:200px">
-                <% if (data?.Avatar?.formats?.medium?.url && data?.More_informations?.informations !=='infoNotDisplayed'
+            <div class="list-single-main-media fl-wrap" style="width:200px;height:200px">
+              <% if (data?.Avatar?.formats?.medium?.url && data?.More_informations?.informations !=='infoNotDisplayed'
                   ){%>
-                  <img id="theImageTopIndex" data-src="<%= data?.Avatar.formats.medium.url%>"
-                    src="<%= data?.Avatar.formats.medium.url%>" loading="lazy" alt="image <%= professionnelFormatted.lowerCase %> <%= data?.Company%>">
-                  <%}else if (data?.Avatar?.url && data?.More_informations?.informations !=='infoNotDisplayed' ){%>
-                    <img style="width:200px;height:200px" id="theImageTopIndex" data-src="<%= data?.Avatar.url%>"
-                      src="<%= data?.Avatar.url%>" loading="lazy" alt="image <%= professionnelFormatted.lowerCase %> <%= data?.Company%>">
-                    <%}else{%>
-                      <img style="width:200px;height:200px" id="theImageTopIndex"
-                        data-src="<%= website.wpUrl %>/wp-content/uploads/2023/05/bg.jpg"
-                        src="<%= website.wpUrl %>/wp-content/uploads/2023/05/bg.jpg"
-                        loading="lazy" alt="image <%= professionnelFormatted.lowerCase %> <%= data?.Company%>">
-                      <%}%>
+              <img id="theImageTopIndex" data-src="<%= data?.Avatar.formats.medium.url%>" src="<%= data?.Avatar.formats.medium.url%>" loading="lazy" alt="image <%= professionnelFormatted.lowerCase %> <%= data?.Company%>">
+              <%}else if (data?.Avatar?.url && data?.More_informations?.informations !=='infoNotDisplayed' ){%>
+              <img style="width:200px;height:200px" id="theImageTopIndex" data-src="<%= data?.Avatar.url%>" src="<%= data?.Avatar.url%>" loading="lazy" alt="image <%= professionnelFormatted.lowerCase %> <%= data?.Company%>">
+              <%}else{%>
+              <img style="width:200px;height:200px" id="theImageTopIndex" data-src="<%= website?.bg %>" src="<%= website?.bg %>" loading="lazy" alt="image <%= professionnelFormatted.lowerCase %> <%= data?.Company%>">
+              <%}%>
               </div>
               <h1 style="font-size: 22px;" class="col-xs-12 col-sm-9 details-title">
                 Avis des patients : <%= data.Company %><div style="display: flex;flex-direction: column;">
-                  <span style="font-size: 13px;color:#FFF">
-                      <% for(var i=0; i < Math.round(data?.Rating); i++){ %>
-                        ⭐
-                        <%}%> - <%= data?.ReviewsNumber %> <%= data?.ReviewsNumber> 1 ? 'notes' : 'note' %> 
-                      </span>
-                </div>
+                <span style="font-size: 13px;color:#FFF">
+                  <% for(var i=0; i < Math.round(data?.Rating); i++){ %>
+                  ⭐
+                  <%}%> - <%= data?.ReviewsNumber %> <%= data?.ReviewsNumber> 1 ? 'notes' : 'note' %>
+                </span>
+              </div>
               </h1>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-    <!-- end header -->
-        <!-- breadcrumb -->
-        <section id="breadcrumb-top" class="gray-bg no-top-padding">
-          <div class="container">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-                <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity%>/"><%= professionnelFormatted.capitalized %> <%=
+  <!-- end header -->
+  <!-- breadcrumb -->
+  <section id="breadcrumb-top" class="gray-bg no-top-padding">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+          <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity%>/"><%= professionnelFormatted.capitalized %> <%=
                       data?.City%>
-                  </a>
-                </li>
-                <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity%>/<%= data?.Url%>/"><%= professionnelFormatted.capitalized %></a></li>
-                <li class="breadcrumb-item active" aria-current="page">Avis</li>
-              </ol>
-            </nav>
+            </a>
+          </li>
+          <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity%>/<%= data?.Url%>/"><%= professionnelFormatted.capitalized %></a></li>
+          <li class="breadcrumb-item active" aria-current="page">Avis</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  <!-- end breadcrumb -->
+  <section id="main-section-details" class="gray-bg no-top-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <% if(error && error==='duplicate-review' ){%>
+          <div class="alert alert-danger" role="alert">
+            Vous avez déja noté ce <%= professionnelFormatted.lowerCase %>.
           </div>
-        </section>
-        <!-- end breadcrumb -->
-          <section id="main-section-details" class="gray-bg no-top-padding">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-8">
-                  <% if(error && error==='duplicate-review' ){%>
-                    <div class="alert alert-danger" role="alert">
-                      Vous avez déja noté ce <%= professionnelFormatted.lowerCase %>.
-                    </div>
-                    <%}%>
+          <%}%>
                       <% if(error && error==='invalid' ){%>
-                        <div class="alert alert-danger" role="alert">
-                          L'ajout de liens est interdit dans les commentaires.
-                        </div>
-                        <%}%>
+          <div class="alert alert-danger" role="alert">
+            L'ajout de liens est interdit dans les commentaires.
+          </div>
+          <%}%>
                                     <div class="left-details">
                                       <div class="clearfix"></div>
                                       <!-- see comments section -->
@@ -131,71 +97,70 @@
                                             style="width: 100px;height: 60px; position:unset; margin-bottom: 30px;">
                                             <span class="review-score-total-item">
                                               <%= data?.Rating> 0 ? data?.Rating?.toFixed(1) : "-" %>
-                                            </span>
+          </span>
 
-                                            <div>
-                                              <% for(var i=0; i < Math.round(data?.Rating); i++){ %>
-                                                <i class="fas fa-star"></i>
-                                                <%}%>
+          <div>
+            <% for(var i=0; i < Math.round(data?.Rating); i++){ %>
+            <i class="fas fa-star"></i>
+            <%}%>
                                             </div>
                                           </div>
                                           <a id="btn-send-review"
                                             href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity %>/<%= data?.Url %>/"
-                                            class="btn color2-bg float-btn">Voir les informations de
-                                            ce <%= professionnelFormatted.lowerCase %><i class="far fa-info"></i>
-                                          </a>
-                                        </div>
-                                        <!-- reviews-score-wrap end -->
-                                        <!-- reviews-comments-item -->
-                                        <div class="list-single-main-item_content fl-wrap">
-                                          <div class="reviews-comments-wrap">
-                                            <%if(data?.Reviews?.length> 0){
+            class="btn color2-bg float-btn">Voir les informations de
+            ce <%= professionnelFormatted.lowerCase %><i class="far fa-info"></i>
+            </a>
+          </div>
+          <!-- reviews-score-wrap end -->
+          <!-- reviews-comments-item -->
+          <div class="list-single-main-item_content fl-wrap">
+            <div class="reviews-comments-wrap">
+              <%if(data?.Reviews?.length> 0){
                                               data?.Reviews?.reverse().forEach((item, i)=> {%>
-                                              <!-- reviews-comments-item -->
-                                              <div class="reviews-comments-item">
-                                                <div class="review-comments-avatar">
-                                                </div>
-                                                <div class="reviews-comments-item-text fl-wrap">
-                                                  <div class="reviews-comments-header fl-wrap">
-                                                    <div style="display:flex; flex-direction:column;">
-                                                      <div class="review-score-user">
-                                                        <div>
-                                                          <% for(var i=0; i < Math.round(data?.Rating); i++){ %>
-                                                            <i class="fas fa-star"></i>
-                                                            <%}%>
+              <!-- reviews-comments-item -->
+              <div class="reviews-comments-item">
+                <div class="review-comments-avatar">
+                </div>
+                <div class="reviews-comments-item-text fl-wrap">
+                  <div class="reviews-comments-header fl-wrap">
+                    <div style="display:flex; flex-direction:column;">
+                      <div class="review-score-user">
+                        <div>
+                          <% for(var i=0; i < Math.round(data?.Rating); i++){ %>
+                          <i class="fas fa-star"></i>
+                          <%}%>
                                                         </div>
                                                         <span class="review-score-user_item">
                                                           <%= item?.Rating %>
-                                                        </span>
+                          </span>
 
-                                                      </div>
-                                                      <h4 class="rating-author">
-                                                        <%= item?.Author%>
-                                                      </h4>
+                        </div>
+                        <h4 class="rating-author">
+                          <%= item?.Author%>
+                        </h4>
 
-                                                    </div>
-                                                    <p class="commentText">
-                                                      <%= item?.Text %>
-                                                    </p>
-                                                    <div class="reviews-comments-item-footer fl-wrap">
-                                                      <div class="reviews-comments-item-date"><span><i
-                                                            class="far fa-calendar-check"></i>
-                                                          <%= item?.Publishing_date.split('-').reverse().join('/') %>
-                                                        </span></div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <!--reviews-comments-item end-->
-                                              </div>
-                                              <%}) }else{%>
-                                                <h4 class="rating-author">
-                                                  Le <%= professionnelFormatted.lowerCase %> <%= data.Company %> n'a pas d'avis pour le moment, soyez
-                                                    le
-                                                    premier à
-                                                    donner
-                                                    votre avis.
-                                                </h4>
-                                                <%}%>
+                      </div>
+                      <p class="commentText">
+                        <%= item?.Text %>
+                      </p>
+                      <div class="reviews-comments-item-footer fl-wrap">
+                        <div class="reviews-comments-item-date"><span><i class="far fa-calendar-check"></i>
+                            <%= item?.Publishing_date.split('-').reverse().join('/') %>
+                          </span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--reviews-comments-item end-->
+                </div>
+                <%}) }else{%>
+                <h4 class="rating-author">
+                  Le <%= professionnelFormatted.lowerCase %> <%= data.Company %> n'a pas d'avis pour le moment, soyez
+                  le
+                  premier à
+                  donner
+                  votre avis.
+                </h4>
+                <%}%>
                                           </div>
                                         </div>
                                       </div>
@@ -203,8 +168,8 @@
                                         <!-- end see comments section -->
                                   <!-- banner -->
                                   <%if(isBannerDisplayed){%>
-                                    <%- include partials/banner.ejs %>
-                                    <%}%>
+                <%- include partials/banner.ejs %>
+                <%}%>
                                                         <!-- end banner -->
                                                   <!-- Laisser un avis box -->
                                                   <div class="list-single-main-item fl-wrap block_box" id="sec6">
@@ -285,88 +250,75 @@
                                                         </div>
                                                         <input type="hidden" name="PreviousRating"
                                                           value="<%= data.Rating %>">
-                                                        <input type="hidden" name="TotalRating"
-                                                          value="<%= data.TotalRating %>">
-                                                        <input type="hidden" name="PastReviews" value="<%= reviews %>">
-                                                        <input type="hidden" name="ReviewsNumber"
-                                                          value="<%= data.ReviewsNumber %>">
-                                                        <input type="hidden" name="professionnelId"
-                                                          value="<%= data.id %>">
-                                                        <input type="hidden" name="Url" value="<%= data.Url %>">
-                                                        <input type="hidden" name="City" value="<%= data.City %>">
-                                                        <input type="hidden" name="slugCity"
-                                                          value="<%= data.slugCity %>">
-                                                        <input type="hidden" name="Uid" value="<%= data.Uid %>">
-                                                        <input type="hidden" name="IP" value="<%= ip %>">
-                                                      </form>
-                                                    </div>
-                                                    <!-- Add Review Box / End -->
-                                                  </div>
-                                                  <!-- fin Laisser un avis box -->
-                                      </div>
-                                    </div>
-          </section>
-          <!-- certified professionnals -->
-          <section class="gray-bg no-top-padding" id="moreProfessionnal">
-            <div class="container">
-              <div class="row">
-                <div class="col-12">
-                  <% if (bestResults.length> 0){%>
-                    <div style="display:flex;align-items: center;justify-content: center;margin: 20px auto;">
-                      <h3 class="listing-title" style="width: 90%;">Nous vous recommandons ces <%= professionnelFormatted.pluralLowerCase %>
-                        vérifiés à <%= data?.City %>
-                      </h3>
-                      <span class="verified-badge" style="margin-top: -2px;"><i class="fas fa-check"></i></span>
+                <input type="hidden" name="TotalRating" value="<%= data.TotalRating %>">
+                <input type="hidden" name="PastReviews" value="<%= reviews %>">
+                <input type="hidden" name="ReviewsNumber" value="<%= data.ReviewsNumber %>">
+                <input type="hidden" name="professionnelId" value="<%= data.id %>">
+                <input type="hidden" name="Url" value="<%= data.Url %>">
+                <input type="hidden" name="City" value="<%= data.City %>">
+                <input type="hidden" name="slugCity" value="<%= data.slugCity %>">
+                <input type="hidden" name="Uid" value="<%= data.Uid %>">
+                <input type="hidden" name="IP" value="<%= ip %>">
+                </form>
+              </div>
+              <!-- Add Review Box / End -->
+            </div>
+            <!-- fin Laisser un avis box -->
+          </div>
+        </div>
+  </section>
+  <!-- certified professionnals -->
+  <section class="gray-bg no-top-padding" id="moreProfessionnal">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <% if (bestResults.length> 0){%>
+          <div style="display:flex;align-items: center;justify-content: center;margin: 20px auto;">
+            <h3 class="listing-title" style="width: 90%;">Nous vous recommandons ces <%= professionnelFormatted.pluralLowerCase %>
+              vérifiés à <%= data?.City %>
+            </h3>
+            <span class="verified-badge" style="margin-top: -2px;"><i class="fas fa-check"></i></span>
+          </div>
+          <div>
+            <div class="row">
+              <% bestResults?.forEach((item, i)=> { %>
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="search-result">
+                  <%- include partials/pro-card.ejs %>
+                </div>
+              </div>
+              <%})%>
+              <% if (arrondissements?.length> 0){%>
+              <div style="margin:50px 0"></div>
+              <div class="container">
+                <div class="row">
+                  <div class="container-arrondissements">
+                    <div class="row">
+                      <% arrondissements?.forEach((item, i)=> { %>
+                      <a href="/<%= professionnelFormatted.slug %>/<%= item?.place %>/" class="col-4 col-sm-3 col-md-2">
+                        <div class="border-arrondissements">
+                          <span>
+                            <%= professionnelFormatted.capitalized %> <%= item?.name %>
+                          </span>
+                        </div>
+                      </a>
+                      <%})%>
                     </div>
-                    <div>
-                      <div class="row">
-                        <% bestResults?.forEach((item, i)=> { %>
-                          <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="search-result">
-                              <%- include partials/pro-card.ejs %>
-                            </div>
-                          </div>
-                        <%})%>
-                        <% if (arrondissements?.length> 0){%>
-                          <div style="margin:50px 0"></div>
-                          <div class="container">
-                            <div class="row">
-                              <div class="container-arrondissements">
-                                <div class="row">
-                                  <% arrondissements?.forEach((item, i)=> { %>
-                                    <a href="/<%= professionnelFormatted.slug %>/<%= item?.place %>/" class="col-4 col-sm-3 col-md-2">
-                                      <div class="border-arrondissements">
-                                        <span>
-                                          <%= professionnelFormatted.capitalized %> <%= item?.name %>
-                                        </span>
-                                      </div>
-                                    </a>
-                                    <%})%>
-                                </div>
-                              </div>
-                            </div>
-                            <%}%>
+                  </div>
+                </div>
+                <%}%>
                               <div class="col-12" style="width: 100%;margin-top: 20px;">
                                 <a href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity %>/"
-                                  class="btn dec_btn color2-bg color2-text">Voir tous les <%= professionnelFormatted.pluralLowerCase %><i
-                                    class="far fa-chevron-right"></i></a>
-                              </div>
-                          </div>
-                      <%}%>
+                class="btn dec_btn color2-bg color2-text">Voir tous les <%= professionnelFormatted.pluralLowerCase %><i class="far fa-chevron-right"></i></a>
+              </div>
+            </div>
+            <%}%>
                     </div>
                 </div>
               </div>
           </section>
           <!-- end certified professionnals -->
-          <!--footer -->
-          <%- include partials/footer.ejs %>
-            <!--footer end -->
-            <!-- The core Firebase JS SDK is always required and must be listed first -->
-            <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
-            <script src="js/reviews.js" crossorigin="anonymous"></script>
-            <script src="js/details.min.js" crossorigin="anonymous"></script>
+          
+          <!-- SCRIPTS -->
             <script src="js/modal.js" crossorigin="anonymous"></script>
-</body>
-
-</html>
+           <!-- END SCRIPTS -->

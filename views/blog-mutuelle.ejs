@@ -1,30 +1,3 @@
-<!DOCTYPE HTML>
-<html lang="fr">
-
-<head>
-    <!--=============== basic  ===============-->
-    <meta charset="UTF-8">
-    <title><%= website.name %> Blog ></title>
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="index, follow" />
-    <meta name="description"
-        content="<%= website.name %> | Trouvez les meilleurs <%= professionnelFormatted.pluralLowerCase %> près de chez vous pour votre animal. Prenez rendez-vous gratuitement en ligne en quelques clics." />
-    <!--=============== css  ===============-->
-    <link rel="stylesheet" href="/css/home.min.css">
-    <link href="css/bootstrap-grid.min.css" async rel="stylesheet">
-    <link rel="stylesheet" href="css/custom-home.min.css" async>
-    <link rel="preload" fetchpriority="high" as="image"
-        href="<%= website.wpUrl %>/wp-content/uploads/2023/05/bg.jpg" type="image/webp">
-    <!--=============== favicons ===============-->
-    <link rel="shortcut icon" href="images/favicon-96x96.png">
-    <script src="js/googletagmanager.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <!-- nav -->
-    <%- include partials/header.ejs %>
-        <!-- end nav -->
         <!-- header -->
         <div id="header">
             <div class="overlay"></div>
@@ -61,12 +34,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="section-text">
-                            <h2>Nos articles sur les mutuelles animalières</h2>
+                            <h2>Nos articles sur les mutuelles </h2>
                             <span class="section-separator"></span>
-                            <p>Retrouvez dans cette section nos derniers articles sur les mutuelles animalières
+                            <p>Retrouvez dans cette section nos derniers articles sur les mutuelles 
                         <div class="listing-item-grid_container-blog col-12">
                             <div class="row">
-                                <% resultBlog?.filter(article=> article.categories.includes(4))?.forEach((item, i)=> {
+                                <% resultBlog?..forEach((item, i)=> {
                                     %>
                                     <!--  listing-item-grid  -->
                                     <div class="col-sm-4">
@@ -103,15 +76,3 @@
         </div>
         </div>
         </div>
-        <!--footer -->
-        <%- include partials/footer.ejs %>
-            <!--footer end -->
-            <!-- The core Firebase JS SDK is always required and must be listed first -->
-            <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js" link rel=prefetch></script>
-            <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js" link rel=prefetch></script>
-            <script src="https://kit.fontawesome.com/4283a0ad11.js" crossorigin="anonymous" link rel=prefetch></script>
-            <script src="js/home.min.js" crossorigin="anonymous" link rel=prefetch></script>
-            <script src="js/listing.min.js" crossorigin="anonymous"></script>
-</body>
-
-</html>

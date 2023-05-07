@@ -7,61 +7,29 @@ const indexRouter = require("./routes/index");
 const compression = require("compression");
 const app = express();
 const secure = require("express-force-https");
-const professionnel = require("./config/config").configProject.professionnel;
+const projectConfig = require("./config/config").configProject;
+require("dotenv").config();
+const website = projectConfig.website;
+const professionnelFormatted = projectConfig.professionnelFormatted;
+const metas = require("./config/config").metas;
+const ejsLayout = require("express-ejs-layouts");
+
 // force ssl
 app.use(secure);
 // compress all responses
 app.use(compression());
 
 // view engine setup
+
+app.use(ejsLayout);
+// Static
+app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
-// Static
-app.use(express.static(path.join(__dirname, "public")));
-app.use(
-  `/:${professionnel}/:ville/:name/`,
-  express.static(path.join(__dirname, "public"))
-);
-
-app.use(
-  `/:${professionnel}/:ville/:name/avis/`,
-  express.static(path.join(__dirname, "public"))
-);
-
-app.use(
-  `/:${professionnel}/:ville/:name/avis/:error?/`,
-  express.static(path.join(__dirname, "public"))
-);
-
-app.use("/blog/:name/", express.static(path.join(__dirname, "public")));
-app.use("/blog/", express.static(path.join(__dirname, "public")));
-app.use("/contact/", express.static(path.join(__dirname, "public")));
-app.use("/regions/", express.static(path.join(__dirname, "public")));
-
-app.use("/regions/:region/", express.static(path.join(__dirname, "public")));
-app.use(
-  `/:${professionnel}/:company/`,
-  express.static(path.join(__dirname, "public"))
-);
-
-app.use(
-  `/:${professionnel}/:PlaceToSearch/`,
-  express.static(path.join(__dirname, "public"))
-);
-
-app.use("/mutuelle/", express.static(path.join(__dirname, "public")));
-
-app.use("/blog/mutuelle/", express.static(path.join(__dirname, "public")));
-
-app.use("/", express.static(path.join(__dirname, "public")));
-app.use("/error/", express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 
@@ -80,7 +48,12 @@ app.use(function (err, req, res, next) {
   console.log(res.locals.error);
   // render the error page
   res.status(err.status || 500);
-  res.render("error", { isBannerDisplayed: false });
+  res.render("error", {
+    isBannerDisplayed: false,
+    website,
+    professionnelFormatted,
+    metas: metas?.error,
+  });
 });
 
 module.exports = app;

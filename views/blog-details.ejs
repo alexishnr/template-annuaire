@@ -1,25 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="fr">
-
-<head>
-    <!--=============== basic  ===============-->
-    <meta charset="UTF-8">
-    <title>
-        <%= data?.title?.rendered %>
-    </title>
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="index, follow" />
-    <meta name="description" content="<%= data?.title?.rendered %> : Tous nos conseils pour la santé de votre animal." />
-
-    <!--=============== css  ===============-->
-    <link rel="stylesheet" async href="css/home.min.css">
-    <link rel="stylesheet" async href="css/blog.min.css">
-    <link href="css/bootstrap-grid.min.css" async rel="stylesheet">
-    <link rel="stylesheet" href="css/custom-home.min.css" async>
+<link rel="stylesheet" async href="css/blog.min.css">
     <link rel="stylesheet" href="css/tables.css" async>
-    <!--=============== favicons ===============-->
-    <link rel="shortcut icon" href="images/favicon-96x96.png">
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -177,15 +157,8 @@
                 </div>
             </div>
         </div>
-        <!--footer -->
-        <%- include partials/footer.ejs %>
-            <!--footer end -->
-            <!-- The core Firebase JS SDK is always required and must be listed first -->
-            <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js" link rel=prefetch></script>
-            <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js" link rel=prefetch></script>
+        <!-- SCRIPTS -->
             <script src="https://cdn.jsdelivr.net/npm/marked@3.0.7/marked.min.js"></script>
-            <script src="https://kit.fontawesome.com/4283a0ad11.js" crossorigin="anonymous" link rel=prefetch
-                async></script>
             <script>
                 let text = document.getElementById('text').innerHTML;
 
@@ -211,6 +184,4 @@
                 }
             </script>
             <script src="https://tools.comparadise.tech/iframe-wrapper.js" async></script>
-</body>
-
-</html>
+            <!-- END SCRIPTS -->

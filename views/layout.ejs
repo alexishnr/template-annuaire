@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <!--=============== basic  ===============-->
+    <meta charset="UTF-8" />
+    <title><%= metas.title %></title>
+    <meta name="description" content="<%= metas.description %>" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="robots" content="index, follow" />
+    <!--=============== css  ===============-->
+    <link rel="stylesheet" href="/css/home.min.css" />
+    <link href="/css/bootstrap-grid.min.css" async rel="stylesheet" />
+    <link rel="stylesheet" href="/css/navbar.css" async />
+    <link rel="stylesheet" href="/css/custom-home.min.css" async />
+    <link
+      rel="preload"
+      fetchpriority="high"
+      as="image"
+      href="<%= website?.bg %>"
+      type="image/webp"
+    />
+    <!--=============== favicons ===============-->
+    <link rel="shortcut icon" href="/images/marker2.png" />
+    <script src="/js/googletagmanager.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <!-- nav -->
+    <%- include partials/header.ejs %>
+    <!-- end nav -->
+    <%- body %>
+    <!--footer -->
+    <%- include partials/footer.ejs %>
+    <!--footer end -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script
+      src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"
+      link
+      rel="prefetch"
+    ></script>
+    <script
+      src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"
+      link
+      rel="prefetch"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/4283a0ad11.js"
+      crossorigin="anonymous"
+      link
+      rel="prefetch"
+    ></script>
+  </body>
+</html>
