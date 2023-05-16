@@ -4,7 +4,7 @@
     "@type": "Dentist",
     "name": "<%= data?.Company %>",
     "@id": "<%= data?.ProfessionnelUid %>",
-    "url": "<%= website.url %>/<%= professionnelFormatted.slug %>/<%= data?.Url %>",
+    "url": "<%= website.url %>/<%= professionnelFormatted.slugUrl %>/<%= data?.Url %>",
     "telephone": "<%= data?.Phone %>",
     "aggregateRating": {
       "@type": "AggregateRating",
@@ -40,7 +40,7 @@
               <%}%>
               </div>
               <h1 style="font-size: 22px;" class="col-xs-12 col-sm-9 details-title">
-                Avis des patients : <%= data.Company %><div style="display: flex;flex-direction: column;">
+                Avis : <%= data.Company %><div style="display: flex;flex-direction: column;">
                 <span style="font-size: 13px;color:#FFF">
                   <% for(var i=0; i < Math.round(data?.Rating); i++){ %>
                   ⭐
@@ -61,11 +61,11 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-          <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity%>/"><%= professionnelFormatted.capitalized %> <%=
+          <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slugUrl %>/<%= data?.slugCity%>/"><%= professionnelFormatted.capitalized %> <%=
                       data?.City%>
             </a>
           </li>
-          <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity%>/<%= data?.Url%>/"><%= professionnelFormatted.capitalized %></a></li>
+          <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slugUrl %>/<%= data?.slugCity%>/<%= data?.Url%>/"><%= professionnelFormatted.capitalized %></a></li>
           <li class="breadcrumb-item active" aria-current="page">Avis</li>
         </ol>
       </nav>
@@ -101,12 +101,12 @@
 
           <div>
             <% for(var i=0; i < Math.round(data?.Rating); i++){ %>
-            <i class="fas fa-star"></i>
+            ⭐
             <%}%>
                                             </div>
                                           </div>
                                           <a id="btn-send-review"
-                                            href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity %>/<%= data?.Url %>/"
+                                            href="/<%= professionnelFormatted.slugUrl %>/<%= data?.slugCity %>/<%= data?.Url %>/"
             class="btn color2-bg float-btn">Voir les informations de
             ce <%= professionnelFormatted.lowerCase %><i class="far fa-info"></i>
             </a>
@@ -127,7 +127,7 @@
                       <div class="review-score-user">
                         <div>
                           <% for(var i=0; i < Math.round(data?.Rating); i++){ %>
-                          <i class="fas fa-star"></i>
+                          ⭐
                           <%}%>
                                                         </div>
                                                         <span class="review-score-user_item">
@@ -195,24 +195,19 @@
                                                                       aria-label="First group">
                                                                       <button type="button"
                                                                         class="btn btn-outline-secondary btn-rating"
-                                                                        onclick="myFunction(1)">1 <i
-                                                                          class="fas fa-star rating-star"></i></button>
+                                                                        onclick="myFunction(1)">1 ⭐</button>
                                                                       <button type="button"
                                                                         class="btn btn-outline-secondary btn-rating"
-                                                                        onclick="myFunction(2)">2 <i
-                                                                          class="fas fa-star rating-star"></i></button>
+                                                                        onclick="myFunction(2)">2 ⭐</button>
                                                                       <button type="button"
                                                                         class="btn btn-outline-secondary btn-rating"
-                                                                        onclick="myFunction(3)">3 <i
-                                                                          class="fas fa-star rating-star"></i></button>
+                                                                        onclick="myFunction(3)">3 ⭐</button>
                                                                       <button type="button"
                                                                         class="btn btn-outline-secondary btn-rating"
-                                                                        onclick="myFunction(4)">4 <i
-                                                                          class="fas fa-star rating-star"></i></button>
+                                                                        onclick="myFunction(4)">4 ⭐</button>
                                                                       <button type="button"
                                                                         class="btn btn-outline-secondary btn-rating"
-                                                                        onclick="myFunction(5)">5 <i
-                                                                          class="fas fa-star rating-star"></i></button>
+                                                                        onclick="myFunction(5)">5 ⭐</button>
                                                                     </div>
                                                                   </div>
                                                                 </div>
@@ -295,7 +290,7 @@
                   <div class="container-arrondissements">
                     <div class="row">
                       <% arrondissements?.forEach((item, i)=> { %>
-                      <a href="/<%= professionnelFormatted.slug %>/<%= item?.place %>/" class="col-4 col-sm-3 col-md-2">
+                      <a href="/<%= professionnelFormatted.slugUrl %>/<%= item?.place %>/" class="col-4 col-sm-3 col-md-2">
                         <div class="border-arrondissements">
                           <span>
                             <%= professionnelFormatted.capitalized %> <%= item?.name %>
@@ -308,7 +303,7 @@
                 </div>
                 <%}%>
                               <div class="col-12" style="width: 100%;margin-top: 20px;">
-                                <a href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity %>/"
+                                <a href="/<%= professionnelFormatted.slugUrl %>/<%= data?.slugCity %>/"
                 class="btn dec_btn color2-bg color2-text">Voir tous les <%= professionnelFormatted.pluralLowerCase %><i class="far fa-chevron-right"></i></a>
               </div>
             </div>

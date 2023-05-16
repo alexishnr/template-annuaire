@@ -4,7 +4,7 @@
       "@type": "",
       "name": "<%= data?.Company %>",
       "@id": "<%= data?.ProfessionnelUid %>",
-      "url": "<%= website.url %>/<%= professionnelFormatted.slug %>/<%= data?.Url %>",
+      "url": "<%= website.url %>/<%= professionnelFormatted.slugUrl %>/<%= data?.Url %>",
       "telephone": "<%= data?.Phone %>",
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -68,7 +68,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/"><%= professionnelFormatted.capitalized %></a></li>
-                <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slug %>/<%= data.slugCity%>/"><%= professionnelFormatted.capitalized %> <%=
+                <li class="breadcrumb-item"><a href="/<%= professionnelFormatted.slugUrl %>/<%= data.slugCity%>/"><%= professionnelFormatted.capitalized %> <%=
                       data?.City%>
                   </a>
                 </li>
@@ -138,7 +138,7 @@
                                         <%}%>
                                           <div class="separator-box"></div>
                                           <a id="btn-send-review"
-                                            href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity %>/<%= data?.Url %>/avis/"
+                                            href="/<%= professionnelFormatted.slugUrl %>/<%= data?.slugCity %>/<%= data?.Url %>/avis/"
                                             class=" btn">Voir
                                             les
                                             avis de
@@ -573,7 +573,7 @@
                               <div class="container-arrondissements">
                                 <div class="row">
                                   <% arrondissements?.forEach((item, i)=> { %>
-                                    <a href="/<%= professionnelFormatted.slug %>/<%= item?.place %>/" class="col-4 col-sm-3 col-md-2">
+                                    <a href="/<%= professionnelFormatted.slugUrl %>/<%= item?.place %>/" class="col-4 col-sm-3 col-md-2">
                                       <div class="border-arrondissements">
                                         <span>
                                           <%= professionnelFormatted.pluralCapitalized %> <%= item?.name %>
@@ -586,7 +586,7 @@
                             </div>
                             <%}%>
                               <div class="col-12" style="width: 100%;margin-top: 20px;">
-                                <a href="/<%= professionnelFormatted.slug %>/<%= data?.slugCity %>/"
+                                <a href="/<%= professionnelFormatted.slugUrl %>/<%= data?.slugCity %>/"
                                   class="btn dec_btn color2-bg color2-text">Voir tous les <%= professionnelFormatted.pluralLowerCase %></a>
                               </div>
                           </div>

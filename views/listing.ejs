@@ -27,46 +27,23 @@
   <div class="container">
     <div class="row">
       <!-- Text -->
-      <div id="text-home" class="section-text-desc">
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-          asperiores error odio, reprehenderit explicabo numquam natus
-          voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur
-          laborum fuga commodi eligendi.
-        </p>
-
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-          asperiores error odio, reprehenderit explicabo numquam natus
-          voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur
-          laborum fuga commodi eligendi.
-        </p>
-
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-          asperiores error odio, reprehenderit explicabo numquam natus
-          voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur
-          laborum fuga commodi eligendi.
-        </p>
-
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-          asperiores error odio, reprehenderit explicabo numquam natus
-          voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur
-          laborum fuga commodi eligendi.
-        </p>
-      </div>
+      <%- include partials/text-listing.ejs %>
       <!-- end Text -->
       <!-- banner -->
       <%if(isBannerDisplayed){%> <%- include partials/banner.ejs %> <%}%>
       <!-- end banner -->
       <% if (bestResults?.length> 0){%>
       <!-- certified professionnals -->
-      <div style="display: flex; align-items: center; justify-content: center">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          margin-top: 50px;
+          margin-bottom: 30px;
+        "
+      >
         <h3
           class="listing-title"
           style="
@@ -106,7 +83,7 @@
         <div class="row">
           <% arrondissements?.forEach((item, i)=> { %>
           <a
-            href="/<%= professionnelFormatted.slug %>/<%= item?.place %>/"
+            href="/<%= professionnelFormatted.slugUrl %>/<%= item?.place %>/"
             class="col-4 col-sm-3 col-md-2"
           >
             <div class="border-arrondissements">

@@ -1,13 +1,14 @@
 const configProject = {
-  professionnelsToFetch: "veterinaires",
-  professionnel: "veterinaire",
-  updateProfessionnel: "updateVeterinaire",
+  professionnelsToFetch: "medecins",
+  professionnel: "medecin",
+  professionnelUrl: "medecin-generaliste",
+  updateProfessionnel: "updateMedecin",
   createProfessionnelReview: {
-    input: "createCommentairesVeterinaireInput",
-    review: "createCommentairesVeterinaire",
-    fetch: "commentairesVeterinaire",
+    input: "createCommentairesMedecinInput",
+    review: "createCommentairesMedecin",
+    fetch: "commentairesMedecin",
   },
-  configProfessionnel: "configVeterinaire",
+  configProfessionnel: "configMedecin",
   isBannerDisplayed: false,
   host: "https://h2h-app-4el6l.ondigitalocean.app",
   auth: {
@@ -15,23 +16,23 @@ const configProject = {
     password: process.env.SECRET_PWD,
   },
   website: {
-    url: "https://charliepets.com",
-    name: "Charlie Pet's",
-    wpUrl: "https://www.api.h2hstudioweb.com/charliepets",
+    url: "N/A",
+    name: "N/A",
+    wpUrl: "N/A",
     bg: "",
   },
   professionnelFormatted: {
-    capitalized: "Vétérinaire",
-    lowerCase: "vétérinaire",
-    pluralCapitalized: "Vétérinaires",
-    pluralLowerCase: "vétérinaires",
-    slug: "veterinaire",
-    pluralSlug: "veterinaires",
+    capitalized: "Médecin généraliste",
+    lowerCase: "médecin généraliste",
+    pluralCapitalized: "Médecins généraliste",
+    pluralLowerCase: "médecins généraliste",
+    slugUrl: "medecin-generaliste",
+    pluralSlug: "medecins-generaliste",
   },
 };
 
 const configWP = {
-  host: "https://www.api.h2hstudioweb.com/charliepets",
+  host: "N/A",
   categorySante: 3,
   categoryFeaturedSante: 4,
   categoryMutuelle: 3,
@@ -44,12 +45,12 @@ const professionnel = configProject.professionnelFormatted;
 // address = <%= address %>
 // place = <%= place %>
 // company = <%= company %>
-// address = <%= address %>
+// region = <%= region %>
 // article title = <%= articleTitle %>
 const metas = {
   index: {
     title: `${professionnel.pluralCapitalized}  & ${professionnel.pluralLowerCase} de garde | Rdv Aujourd'hui 24h/24 & 7j/7`,
-    description: `${professionnel.lowerCase}, trouvez un ${professionnel.lowerCase} et un ${professionnel.lowerCase} de garde 24h/24 & 7j/7 près de chez vous pour votre animal. Prenez rendez-vous gratuitement en ligne en quelques clics.`,
+    description: `${professionnel.lowerCase}, trouvez un ${professionnel.lowerCase} et un ${professionnel.lowerCase} de garde 24h/24 & 7j/7 près de chez vous. Prenez rendez-vous gratuitement en ligne en quelques clics.`,
   },
   listing: {
     title: `${professionnel.pluralCapitalized} à <%= place %>, Rdv Aujourd'hui 24h/24 & 7j/7`,
@@ -57,7 +58,7 @@ const metas = {
   },
   details: {
     title: `${professionnel.capitalized} <%= company %> | Prendre Rdv Aujourd'hui.`,
-    description: `Trouvez un rdv avec le ${professionnel.lowerCase}: <%= company %>, <%= address %> pour une consultation.`,
+    description: `Trouvez un rdv avec le ${professionnel.lowerCase}: <%= company %>, <%= address %> pour un rendez-vous.`,
   },
   reviews: {
     title: `Avis des patients du ${professionnel.lowerCase} <%= company %>`,
@@ -73,23 +74,23 @@ const metas = {
   },
   blog: {
     title: `${configProject.website.name} | Blog`,
-    description: `${configProject.website.name} | Trouvez les meilleurs ${professionnel.pluralLowerCase} près de chez vous pour votre animal. Prenez rendez-vous gratuitement en ligne en quelques clics.`,
+    description: `${configProject.website.name} | Trouvez les meilleurs ${professionnel.pluralLowerCase} près de chez vous. Prenez rendez-vous gratuitement en ligne en quelques clics.`,
   },
   blogMutuelle: {
     title: `${configProject.website.name} | Blog`,
-    description: `${configProject.website.name} | Trouvez les meilleurs ${professionnel.pluralLowerCase} près de chez vous pour votre animal. Prenez rendez-vous gratuitement en ligne en quelques clics.`,
+    description: `${configProject.website.name} | Trouvez les meilleurs ${professionnel.pluralLowerCase} près de chez vous. Prenez rendez-vous gratuitement en ligne en quelques clics.`,
   },
   blogDetails: {
     title: ` <%= articleTitle %>`,
-    description: `<%= articleTitle %> : Tous nos conseils pour la santé de votre animal.`,
+    description: `<%= articleTitle %> : Tous nos conseils.`,
   },
   allRegions: {
     title: `${professionnel.pluralCapitalized} en France | ${configProject.website.name}`,
-    description: `${configProject.website.name} | Trouvez les meilleurs ${professionnel.pluralLowerCase} près de chez vous pour votre animal. Prenez rendez-vous gratuitement en ligne en quelques clics.`,
+    description: `${configProject.website.name} | Trouvez les meilleurs ${professionnel.pluralLowerCase} près de chez vous. Prenez rendez-vous gratuitement en ligne en quelques clics.`,
   },
   contact: {
     title: `${configProject.website.name} | Contact`,
-    description: `${configProject.website.name} | Trouvez les meilleurs ${professionnel.pluralLowerCase} près de chez vous pour votre animal. Prenez rendez-vous gratuitement en ligne en quelques clics.`,
+    description: `${configProject.website.name} | Trouvez les meilleurs ${professionnel.pluralLowerCase} près de chez vous. Prenez rendez-vous gratuitement en ligne en quelques clics.`,
   },
   allCities: {
     title: `${configProject.website.name} | Villes`,

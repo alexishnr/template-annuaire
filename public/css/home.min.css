@@ -34,6 +34,12 @@ a {
   align-items: center;
 }
 
+#text-home > ul {
+  padding-left: 0;
+  color: #000000;
+  line-height: 29px;
+}
+
 .overlay {
   position: absolute;
   top: 0;

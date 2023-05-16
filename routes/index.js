@@ -17,6 +17,7 @@ const projectConfig = require("../config/config").configProject;
 const configWP = require("../config/config").configWP;
 const professionnelsToFetch = projectConfig.professionnelsToFetch;
 const professionnel = projectConfig.professionnel;
+const professionnelUrl = projectConfig.professionnelUrl;
 const updateProfessionnel = projectConfig.updateProfessionnel;
 const createProfessionnelReview = projectConfig.createProfessionnelReview;
 const wpApi = configWP.host;
@@ -117,10 +118,10 @@ router.get("/", function (req, res) {
 
 router.post("/recherche", function (req, res) {
   const PlaceToSearch = slug(req.body.PlaceToSearch);
-  res.redirect(`/${professionnel}/${PlaceToSearch}`);
+  res.redirect(`/${professionnelUrl}/${PlaceToSearch}`);
 });
 
-router.get(`/:${professionnel}/:PlaceToSearch`, function (req, res) {
+router.get(`/:${professionnelUrl}/:PlaceToSearch`, function (req, res) {
   console.log(typeof host, "host");
   const PlaceToSearch = clean(req.params.PlaceToSearch);
   let City;
@@ -200,7 +201,7 @@ router.get(`/:${professionnel}/:PlaceToSearch`, function (req, res) {
     });
 });
 
-router.get(`/:${professionnel}/:ville/:name`, function (req, res) {
+router.get(`/:${professionnelUrl}/:ville/:name`, function (req, res) {
   const id = req.params.name;
 
   fetch(host + "/graphql", {
@@ -327,7 +328,7 @@ router.get(`/:${professionnel}/:ville/:name`, function (req, res) {
           if (responseAsJson.data[professionnelsToFetch].length > 0) {
             if (req.params.ville !== resultsData[0].slugCity)
               res.redirect(
-                `/${professionnel}/${resultsData[0].slugCity}/${resultsData[0].Url}`
+                `/${professionnelUrl}/${resultsData[0].slugCity}/${resultsData[0].Url}`
               );
             let bestResultsData = responseAsJson1.data[professionnelsToFetch]
               .splice(0, 6)
@@ -399,17 +400,19 @@ router.get(`/:${professionnel}/:ville/:name`, function (req, res) {
     });
 });
 
-router.get(`/:${professionnel}/:ville/:name/avis/:error?`, function (req, res) {
-  const id = req.params.name;
-  const specificList = [];
+router.get(
+  `/:${professionnelUrl}/:ville/:name/avis/:error?`,
+  function (req, res) {
+    const id = req.params.name;
+    const specificList = [];
 
-  fetch(host + "/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: `query ${professionnelsToFetch}($where: JSON)
+    fetch(host + "/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `query ${professionnelsToFetch}($where: JSON)
                 {
                 ${professionnelsToFetch} (where: $where){
                   isDisplayed
@@ -450,24 +453,24 @@ router.get(`/:${professionnel}/:ville/:name/avis/:error?`, function (req, res) {
                   }
                 }
               }`,
-      variables: {
-        where: {
-          Url: id,
+        variables: {
+          where: {
+            Url: id,
+          },
         },
-      },
-    }),
-  })
-    .then((response) => {
-      return response.json();
+      }),
     })
-    .then((responseAsJson) => {
-      fetch(host + "/graphql", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          query: `query ${professionnelsToFetch}($where: JSON)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseAsJson) => {
+        fetch(host + "/graphql", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            query: `query ${professionnelsToFetch}($where: JSON)
                    {
                     ${professionnelsToFetch}(where: $where , sort:"Rating:desc", limit:20)
                   {
@@ -486,86 +489,90 @@ router.get(`/:${professionnel}/:ville/:name/avis/:error?`, function (req, res) {
                     }
                   }
               }`,
-          variables: {
-            where: {
-              PostCode: responseAsJson.data[professionnelsToFetch][0]?.PostCode,
-            },
-          },
-        }),
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((responseAsJson1) => {
-          let reviews = [];
-          let ip = [];
-          let arrondissements = [];
-          let resultsData = responseAsJson.data[professionnelsToFetch]
-            ? responseAsJson.data[professionnelsToFetch]
-            : [];
-          let data = resultsData[0];
-
-          if (resultsData.length > 0) {
-            if (data.City === "Paris")
-              arrondissements = dataArrondissements.paris;
-            else if (data.City === "Marseille")
-              arrondissements = dataArrondissements.marseille;
-            else if (data.City === "Lyon")
-              arrondissements = dataArrondissements.lyon;
-            else arrondissements = [];
-          }
-          if (resultsData.length > 0) {
-            if (req.params.ville !== data.slugCity)
-              res.redirect(`/${professionnel}/${data.slugCity}/${data.Url}`);
-            data.Reviews.forEach((item, i) => {
-              reviews.push(item.id);
-              if (item.IP) ip.push(item.IP);
-            });
-            let bestResultsData = responseAsJson1.data[professionnelsToFetch]
-              .splice(0, 6)
-              .sort(
-                (a, b) =>
-                  b.Rating - a.Rating ||
-                  b.ReviewsNumber.toString().localeCompare(
-                    a.ReviewsNumber.toString()
-                  )
-              );
-            data.Company =
-              data?.DoctolibName && data?.Company.length < 50
-                ? data?.DoctolibName
-                : data?.Company;
-            res.render("reviews", {
-              data: data,
-              slugCityToRender: data.SlugCity,
-              products: [],
-              reviews,
-              arrondissements,
-              ip,
-              error: req.params.error,
-              bestResults: bestResultsData,
-              isBannerDisplayed,
-              professionnelFormatted,
-              website,
-              metas: {
-                title: metas.reviews.title.replace(
-                  "<%= company %>",
-                  data?.Company
-                ),
-                description: metas.reviews.description.replace(
-                  "<%= company %>",
-                  data?.Company
-                ),
+            variables: {
+              where: {
+                PostCode:
+                  responseAsJson.data[professionnelsToFetch][0]?.PostCode,
               },
-            });
-          } else {
-            res.redirect("/error");
-          }
-        });
-    })
-    .catch((e) => {
-      console.error(e);
-    });
-});
+            },
+          }),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((responseAsJson1) => {
+            let reviews = [];
+            let ip = [];
+            let arrondissements = [];
+            let resultsData = responseAsJson.data[professionnelsToFetch]
+              ? responseAsJson.data[professionnelsToFetch]
+              : [];
+            let data = resultsData[0];
+
+            if (resultsData.length > 0) {
+              if (data.City === "Paris")
+                arrondissements = dataArrondissements.paris;
+              else if (data.City === "Marseille")
+                arrondissements = dataArrondissements.marseille;
+              else if (data.City === "Lyon")
+                arrondissements = dataArrondissements.lyon;
+              else arrondissements = [];
+            }
+            if (resultsData.length > 0) {
+              if (req.params.ville !== data.slugCity)
+                res.redirect(
+                  `/${professionnelUrl}/${data.slugCity}/${data.Url}`
+                );
+              data.Reviews.forEach((item, i) => {
+                reviews.push(item.id);
+                if (item.IP) ip.push(item.IP);
+              });
+              let bestResultsData = responseAsJson1.data[professionnelsToFetch]
+                .splice(0, 6)
+                .sort(
+                  (a, b) =>
+                    b.Rating - a.Rating ||
+                    b.ReviewsNumber.toString().localeCompare(
+                      a.ReviewsNumber.toString()
+                    )
+                );
+              data.Company =
+                data?.DoctolibName && data?.Company.length < 50
+                  ? data?.DoctolibName
+                  : data?.Company;
+              res.render("reviews", {
+                data: data,
+                slugCityToRender: data.SlugCity,
+                products: [],
+                reviews,
+                arrondissements,
+                ip,
+                error: req.params.error,
+                bestResults: bestResultsData,
+                isBannerDisplayed,
+                professionnelFormatted,
+                website,
+                metas: {
+                  title: metas.reviews.title.replace(
+                    "<%= company %>",
+                    data?.Company
+                  ),
+                  description: metas.reviews.description.replace(
+                    "<%= company %>",
+                    data?.Company
+                  ),
+                },
+              });
+            } else {
+              res.redirect("/error");
+            }
+          });
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
+);
 
 router.post("/add-review", function (req, res) {
   let data = clean(req.body);
@@ -659,7 +666,7 @@ router.post("/add-review", function (req, res) {
                 })
                 .then(() => {
                   res.redirect(
-                    `/${professionnel}/${data.slugCity}/${data.Url}/avis`
+                    `/${professionnelUrl}/${data.slugCity}/${data.Url}/avis`
                   );
                 })
                 .catch((e) => {
@@ -675,12 +682,12 @@ router.post("/add-review", function (req, res) {
         });
     } else {
       res.redirect(
-        `/${professionnel}/${data.slugCity}/${data.Url}/avis/invalid`
+        `/${professionnelUrl}/${data.slugCity}/${data.Url}/avis/invalid`
       );
     }
   } else {
     res.redirect(
-      `/${professionnel}/${data.slugCity}/${data.Url}/avis/duplicate-review`
+      `/${professionnelUrl}/${data.slugCity}/${data.Url}/avis/duplicate-review`
     );
   }
 });

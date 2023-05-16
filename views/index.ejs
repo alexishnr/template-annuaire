@@ -21,20 +21,7 @@
       <div class="container">
         <div class="row">
           <div style="margin:20px 0"></div>
-          <div id="text-home" style="margin-bottom:50px" class="section-text-desc">
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
-
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
-
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
-
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta asperiores error odio, reprehenderit explicabo numquam natus voluptatem accusamus qui in, vero pariatur? Amet quod, error pariatur laborum fuga commodi eligendi.</p>
-          </div>        
-        </div>
+          <%- include partials/text-home.ejs %>
       </div>
       <!-- banner -->
         <%if(isBannerDisplayed){%>
@@ -125,7 +112,7 @@
               <div class="container-arrondissements">
                 <div class="row">
                   <% citiesList?.forEach((item, i)=> { %>
-                    <a href="/<%= professionnelFormatted.slug %>/<%= item?.slug %>/" class="col-4 col-sm-3 col-md-2">
+                    <a href="/<%= professionnelFormatted.slugUrl %>/<%= item?.slug %>/" class="col-4 col-sm-3 col-md-2">
                       <div class="border-arrondissements">
                         <span><%= professionnelFormatted.pluralCapitalized %> <%= item?.city %></span>
                       </div>

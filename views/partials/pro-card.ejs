@@ -1,5 +1,5 @@
 <a
-  href="/<%= professionnelFormatted.slug %>/<%= item?.slugCity %>/<%= item?.Url %>/"
+  href="/<%= professionnelFormatted.slugUrl %>/<%= item?.slugCity %>/<%= item?.Url %>/"
 >
   <div class="search-result-presentation">
     <div class="search-result-title-container">
@@ -51,9 +51,7 @@
           'note' %>
         </p>
         <div>
-          <% for(var i=0; i < Math.round(item?.Rating); i++){ %>
-          <i class="fas fa-star"></i>
-          <%}%>
+          <% for(var i=0; i < Math.round(item?.Rating); i++){ %> ⭐ <%}%>
         </div>
       </div>
     </div>
